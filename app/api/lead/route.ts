@@ -5,10 +5,9 @@ import {
   getTariffPeriodById,
   getTariffPrice,
 } from "@/data/tariffs";
-import {
-  sendTelegramLeadNotification,
-  type LeadNotification,
-} from "@/lib/telegram";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 type LeadPayload = {
   name?: unknown;
@@ -19,16 +18,117 @@ type LeadPayload = {
   comment?: unknown;
 };
 
-type AcceptedLead = LeadNotification & {
+type AcceptedLead = {
   name: string;
   contact: string;
   tariffId: string;
+  tariffName: string;
   periodId: string;
+  periodLabel: string;
+  deviceCount: number;
+  price: number;
+  device: string;
+  comment: string;
   createdAt: string;
+};
+
+type TelegramApiResponse = {
+  ok?: boolean;
 };
 
 function isFilledString(value: unknown): value is string {
   return typeof value === "string" && value.trim().length > 0;
+}
+
+function sanitizeInlineText(value: string, maxLength: number) {
+  return value
+    .replace(/[\u0000-\u001F\u007F]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, maxLength);
+}
+
+function sanitizeMultilineText(value: string, maxLength: number) {
+  return value
+    .replace(/\r\n?/g, "\n")
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "")
+    .trim()
+    .slice(0, maxLength);
+}
+
+function buildTelegramMessage(lead: AcceptedLead) {
+  const comment = sanitizeMultilineText(lead.comment, 1500) || "—";
+
+  return [
+    "Новая заявка DPN",
+    "",
+    `Тариф: ${sanitizeInlineText(lead.tariffName, 80)}`,
+    `Срок: ${sanitizeInlineText(lead.periodLabel, 80)}`,
+    `Сумма: ${lead.price} ₽`,
+    `Устройств: ${lead.deviceCount}`,
+    "",
+    `Имя: ${sanitizeInlineText(lead.name, 160)}`,
+    `Контакт: ${sanitizeInlineText(lead.contact, 240)}`,
+    `Устройство: ${sanitizeInlineText(lead.device, 80)}`,
+    `Комментарий: ${comment}`,
+    "",
+    "Источник: сайт",
+  ].join("\n");
+}
+
+async function sendTelegramNotification(lead: AcceptedLead) {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN?.trim();
+  const chatId = process.env.TELEGRAM_CHAT_ID?.trim();
+  const envPresent = Boolean(botToken && chatId);
+
+  console.log(`telegram env present: ${envPresent}`);
+
+  if (!botToken || !chatId) {
+    console.warn(
+      "telegram send skipped: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not configured",
+    );
+    return;
+  }
+
+  console.log("telegram send started");
+
+  try {
+    const response = await fetch(
+      `https://api.telegram.org/bot${botToken}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: buildTelegramMessage(lead),
+        }),
+        cache: "no-store",
+        signal: AbortSignal.timeout(8_000),
+      },
+    );
+
+    const responseBody = await response.text();
+    console.log(`telegram send response status: ${response.status}`);
+
+    let telegramResult: TelegramApiResponse | null = null;
+    try {
+      telegramResult = JSON.parse(responseBody) as TelegramApiResponse;
+    } catch {
+      telegramResult = null;
+    }
+
+    if (!response.ok || !telegramResult?.ok) {
+      console.error("telegram send failed:", {
+        status: response.status,
+        responseBody: responseBody.slice(0, 2000),
+      });
+      return;
+    }
+
+    console.log("telegram send ok");
+  } catch {
+    console.error("telegram send failed: network request failed");
+  }
 }
 
 export async function POST(request: Request) {
@@ -115,14 +215,14 @@ export async function POST(request: Request) {
     createdAt: new Date().toISOString(),
   };
 
-  console.log("[DPN lead] lead received", {
+  console.log("lead received", {
     tariffId: lead.tariffId,
     periodId: lead.periodId,
     device: lead.device,
     hasComment: lead.comment.length > 0,
   });
 
-  await sendTelegramLeadNotification(lead);
+  await sendTelegramNotification(lead);
 
   return NextResponse.json({ success: true });
 }

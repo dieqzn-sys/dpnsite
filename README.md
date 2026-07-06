@@ -95,21 +95,47 @@ GOOGLE_SHEETS_WEBHOOK_URL=
 
 После настройки отправьте тестовую заявку через форму и проверьте, что технический бот прислал сообщение в указанный чат.
 
+### Inline-кнопки статусов
+
+К уведомлению о новой заявке прикрепляются четыре кнопки:
+
+- 🟡 В работу → `В работе`
+- 💳 Оплата получена → `Оплата получена`
+- ✅ Доступ выдан → `Доступ выдан`
+- ❌ Отклонить → `Отклонена`
+
+Нажатие кнопки отправляет `callback_query` в `POST /api/telegram/webhook`. Route отвечает через `answerCallbackQuery`, меняет строку `Статус:` методом `editMessageText`, сохраняет inline-кнопки и синхронизирует новый статус с Google Sheets.
+
+После публикации сайта установите webhook технического бота:
+
+```text
+https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://YOUR_DOMAIN/api/telegram/webhook
+```
+
+Подставьте токен только локально при выполнении запроса. Не сохраняйте готовый URL с токеном в репозитории или публичных логах.
+
 ## Google Sheets webhook
 
-Заявки записываются в таблицу **DPN Leads** через опубликованный Apps Script Web App.
+Заявки записываются в таблицу **DPN Leads**, лист **Заявки**, через опубликованный Apps Script Web App.
 
-1. Создайте Google-таблицу с листом `DPN Leads`.
-2. Создайте привязанный Apps Script с функцией `doPost(e)`.
-3. В `doPost(e)` прочитайте JSON из `e.postData.contents` и добавьте новую строку в лист `DPN Leads`.
+1. Создайте Google-таблицу `DPN Leads` с листом `Заявки` и колонками A–N из описания проекта.
+2. Создайте привязанный Apps Script.
+3. Скопируйте код из `docs/google-apps-script.js` в редактор Apps Script.
 4. Опубликуйте Apps Script как Web App с доступом для входящих запросов.
 5. Скопируйте URL deployment и добавьте его в `GOOGLE_SHEETS_WEBHOOK_URL` локально и в Vercel.
-6. После изменения переменных в Vercel выполните новый deploy/redeploy.
+6. После изменения кода Apps Script создайте новую версию deployment.
+7. После изменения переменных в Vercel выполните новый deploy/redeploy.
+
+Apps Script поддерживает два действия:
+
+- `createLead` или отсутствие `action` — добавляет новую строку;
+- `updateStatus` — находит заявку по колонке A, меняет статус в колонке C, `message_id` в колонке M и дату обновления в колонке N.
 
 API отправляет в webhook следующие поля:
 
 ```json
 {
+  "action": "createLead",
   "leadId": "DPN-YYYYMMDD-HHMMSS-XXXX",
   "status": "Новая",
   "tariff": "Pro",
@@ -125,6 +151,19 @@ API отправляет в webhook следующие поля:
 }
 ```
 
+При изменении статуса API отправляет:
+
+```json
+{
+  "action": "updateStatus",
+  "leadId": "DPN-YYYYMMDD-HHMMSS-XXXX",
+  "status": "В работе",
+  "telegramMessageId": "123"
+}
+```
+
+Если `leadId` не найден, Apps Script возвращает `{ "success": false, "error": "Lead not found" }`.
+
 Если URL webhook не задан, форма продолжает работать, а сервер выводит предупреждение `Google Sheets webhook URL is not configured`.
 
 ## Структура
@@ -132,6 +171,7 @@ API отправляет в webhook следующие поля:
 ```text
 app/
   api/lead/route.ts
+  api/telegram/webhook/route.ts
   globals.css
   layout.tsx
   page.tsx
@@ -150,4 +190,8 @@ data/
   faq.ts
   benefits.ts
   site.ts
+docs/
+  google-apps-script.js
+lib/
+  lead-status.ts
 ```

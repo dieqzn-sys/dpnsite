@@ -6,6 +6,10 @@ import {
   getTariffPeriodById,
   getTariffPrice,
 } from "@/data/tariffs";
+import {
+  buildLeadStatusKeyboard,
+  leadStatusLabels,
+} from "@/lib/lead-status";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -79,6 +83,8 @@ function buildTelegramMessage(lead: AcceptedLead) {
 
   return [
     "Новая заявка DPN",
+    `Статус: ${leadStatusLabels.new}`,
+    `ID: ${lead.leadId}`,
     "",
     `Тариф: ${sanitizeInlineText(lead.tariffName, 80)}`,
     `Срок: ${sanitizeInlineText(lead.periodLabel, 80)}`,
@@ -119,6 +125,7 @@ async function sendTelegramNotification(lead: AcceptedLead) {
         body: JSON.stringify({
           chat_id: chatId,
           text: buildTelegramMessage(lead),
+          reply_markup: buildLeadStatusKeyboard(lead.leadId),
         }),
         cache: "no-store",
         signal: AbortSignal.timeout(8_000),
@@ -176,8 +183,9 @@ async function sendGoogleSheetsWebhook(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        action: "createLead",
         leadId: lead.leadId,
-        status: "Новая",
+        status: leadStatusLabels.new,
         tariff: lead.tariffName,
         period: lead.periodLabel,
         price: lead.price,

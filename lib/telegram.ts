@@ -55,13 +55,19 @@ export async function sendTelegramLeadNotification(
 ) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN?.trim();
   const chatId = process.env.TELEGRAM_CHAT_ID?.trim();
+  const envPresent = Boolean(botToken && chatId);
 
-  if (!botToken || !chatId) {
+  console.log("[DPN lead] telegram env present:", envPresent);
+
+  if (!envPresent || !botToken || !chatId) {
     console.warn(
       "[DPN lead] Telegram notification skipped: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not configured.",
     );
+    console.log("[DPN lead] telegram send status: skipped");
     return;
   }
+
+  console.log("[DPN lead] telegram send status: sending");
 
   try {
     const response = await fetch(
@@ -83,12 +89,20 @@ export async function sendTelegramLeadNotification(
       | null;
 
     if (!response.ok || !result?.ok) {
-      console.error("[DPN lead] Telegram API rejected the notification.", {
+      console.error("[DPN lead] telegram send status: failed");
+      console.error("[DPN lead] telegram response error", {
         status: response.status,
         description: result?.description ?? "Unknown Telegram API error",
       });
+      return;
     }
+
+    console.log("[DPN lead] telegram send status: sent");
+    console.log("[DPN lead] telegram response ok", {
+      status: response.status,
+    });
   } catch {
-    console.error("[DPN lead] Telegram notification request failed.");
+    console.error("[DPN lead] telegram send status: failed");
+    console.error("[DPN lead] telegram response error: request failed");
   }
 }

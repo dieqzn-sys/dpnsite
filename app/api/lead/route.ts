@@ -31,10 +31,6 @@ function isFilledString(value: unknown): value is string {
   return typeof value === "string" && value.trim().length > 0;
 }
 
-async function acceptLead(lead: AcceptedLead) {
-  await sendTelegramLeadNotification(lead);
-}
-
 export async function POST(request: Request) {
   let body: LeadPayload;
 
@@ -119,7 +115,14 @@ export async function POST(request: Request) {
     createdAt: new Date().toISOString(),
   };
 
-  await acceptLead(lead);
+  console.log("[DPN lead] lead received", {
+    tariffId: lead.tariffId,
+    periodId: lead.periodId,
+    device: lead.device,
+    hasComment: lead.comment.length > 0,
+  });
+
+  await sendTelegramLeadNotification(lead);
 
   return NextResponse.json({ success: true });
 }

@@ -1,6 +1,7 @@
 node_modules
 .next
 out
+# Local environment files, including .env.local
 .env*
 !.env.example
 npm-debug.log*
@@ -10,4 +11,3 @@ pnpm-debug.log*
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts
-

@@ -5,6 +5,10 @@ import {
   getTariffPeriodById,
   getTariffPrice,
 } from "@/data/tariffs";
+import {
+  sendTelegramLeadNotification,
+  type LeadNotification,
+} from "@/lib/telegram";
 
 type LeadPayload = {
   name?: unknown;
@@ -15,17 +19,11 @@ type LeadPayload = {
   comment?: unknown;
 };
 
-type AcceptedLead = {
+type AcceptedLead = LeadNotification & {
   name: string;
   contact: string;
   tariffId: string;
-  tariffName: string;
   periodId: string;
-  periodLabel: string;
-  deviceCount: number;
-  price: number;
-  device: string;
-  comment: string;
   createdAt: string;
 };
 
@@ -34,11 +32,7 @@ function isFilledString(value: unknown): value is string {
 }
 
 async function acceptLead(lead: AcceptedLead) {
-  if (process.env.NODE_ENV !== "production") {
-    console.info("[DPN lead accepted]", lead);
-  }
-
-  // Future delivery or persistence adapters can be called from this function.
+  await sendTelegramLeadNotification(lead);
 }
 
 export async function POST(request: Request) {

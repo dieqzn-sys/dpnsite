@@ -1,5 +1,6 @@
 import { Benefits } from "@/components/Benefits";
 import { FAQ } from "@/components/FAQ";
+import { FinalCta } from "@/components/FinalCta";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
@@ -7,6 +8,7 @@ import { HowItWorks } from "@/components/HowItWorks";
 import { LeadForm } from "@/components/LeadForm";
 import { Support } from "@/components/Support";
 import { Tariffs } from "@/components/Tariffs";
+import { WhyDepkov } from "@/components/WhyDepkov";
 
 export default function Home() {
   return (
@@ -15,14 +17,15 @@ export default function Home() {
       <main>
         <Hero />
         <Benefits />
-        <Tariffs />
         <HowItWorks />
+        <Tariffs />
+        <WhyDepkov />
         <LeadForm />
         <FAQ />
         <Support />
+        <FinalCta />
       </main>
       <Footer />
     </>
   );
 }
-

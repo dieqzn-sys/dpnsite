@@ -1,92 +1,86 @@
+"use client";
+
+import { useState } from "react";
 import { SectionHeading } from "@/components/SectionHeading";
 import {
   formatDeviceCount,
-  getMinimumTariffPrice,
   tariffPeriods,
   tariffs,
+  type TariffPeriodId,
 } from "@/data/tariffs";
 
 export function Tariffs() {
+  const [periodId, setPeriodId] = useState<TariffPeriodId>("1-month");
+  const selectedPeriod = tariffPeriods.find((period) => period.id === periodId) ?? tariffPeriods[1];
+
   return (
-    <section id="tariffs" className="section-space relative overflow-hidden">
-      <div className="absolute left-1/2 top-1/3 -z-10 h-80 w-[720px] -translate-x-1/2 rounded-full bg-blue-600/[0.07] blur-[140px]" />
+    <section id="tariffs" className="section-space relative overflow-hidden border-y border-white/[0.05] bg-white/[0.012]">
+      <div className="absolute left-1/2 top-1/2 -z-10 h-96 w-[760px] -translate-x-1/2 rounded-full bg-blue-600/[0.08] blur-[150px]" />
       <div className="container-shell">
         <SectionHeading
           eyebrow="Тарифы"
-          title="Выберите удобный формат доступа"
-          description="Подберите тариф по количеству устройств, а затем выберите удобный срок подписки при оформлении."
+          title="Выберите количество устройств"
+          description="Три тарифа, пять сроков подписки и точная стоимость для каждого варианта."
           align="center"
         />
 
-        <div className="mt-13 grid items-stretch gap-5 lg:grid-cols-3">
+        <div className="mx-auto mt-9 flex max-w-2xl gap-1 overflow-x-auto rounded-2xl border border-white/[0.08] bg-black/20 p-1.5" role="group" aria-label="Срок подписки">
+          {tariffPeriods.map((period) => {
+            const selected = period.id === periodId;
+            return (
+              <button
+                key={period.id}
+                type="button"
+                onClick={() => setPeriodId(period.id)}
+                aria-pressed={selected}
+                className={`min-w-fit flex-1 rounded-xl px-3 py-2.5 text-xs font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300 ${selected ? "bg-gradient-to-r from-violet-600 to-blue-500 text-white shadow-lg shadow-violet-950/35" : "text-slate-500 hover:bg-white/[0.04] hover:text-slate-200"}`}
+              >
+                {period.shortLabel}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-3">
           {tariffs.map((tariff) => {
-            const isFeatured = Boolean(tariff.badge);
-            const minimumPrice = getMinimumTariffPrice(tariff);
+            const featured = tariff.id === "pro";
             return (
               <article
-                key={tariff.name}
-                className={`relative flex flex-col rounded-[1.75rem] border p-6 sm:p-7 ${
-                  isFeatured
-                    ? "border-cyan-300/25 bg-gradient-to-b from-cyan-400/[0.09] to-[#0a0e16] shadow-[0_0_55px_rgba(14,165,233,0.09)] lg:-translate-y-3"
-                    : "border-white/[0.08] bg-[#090d14]/85"
-                }`}
+                key={tariff.id}
+                className={`relative flex flex-col overflow-hidden rounded-[1.75rem] border p-6 sm:p-7 ${featured ? "border-violet-300/45 bg-gradient-to-b from-violet-500/[0.12] via-[#0c0b1c] to-[#080912] shadow-[0_0_55px_rgba(109,40,217,0.15)] lg:-translate-y-2" : "border-white/[0.09] bg-[#090a13]/90"}`}
               >
-                {tariff.badge && (
-                  <span className="absolute right-6 top-6 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-cyan-200">
-                    {tariff.badge}
+                {featured && <span className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_18px_#22d3ee]" />}
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-2xl font-semibold tracking-[-0.04em] text-white">{tariff.name}</p>
+                    <p className="mt-1 text-sm text-slate-500">{formatDeviceCount(tariff.deviceCount)}</p>
+                  </div>
+                  <span className="grid size-11 place-items-center rounded-2xl border border-violet-300/15 bg-violet-400/[0.07] text-violet-200">
+                    <svg className="size-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="2" stroke="currentColor" strokeWidth="1.5" /><path d="M8 20h8M12 16v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
                   </span>
-                )}
-
-                <div>
-                  <p className="text-sm font-semibold text-cyan-300">{tariff.name}</p>
-                  <h3 className="mt-5 text-3xl font-semibold tracking-[-0.045em] text-white">от {minimumPrice} ₽</h3>
-                  <p className="mt-1 text-xs text-slate-500">за {tariffPeriods[0].label}</p>
-                  <p className="mt-5 min-h-12 text-sm leading-6 text-slate-400">{tariff.description}</p>
                 </div>
 
-                <div className="my-6 h-px bg-white/[0.07]" />
+                <div className="my-7 h-px bg-white/[0.07]" />
+                <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-600">{selectedPeriod.label}</p>
+                <p className="mt-3 text-4xl font-semibold tracking-[-0.055em] text-white" aria-live="polite">
+                  {tariff.prices[periodId]} <span className="text-lg text-slate-500">₽</span>
+                </p>
 
-                <ul className="flex-1 space-y-3.5">
-                  <li className="flex items-start gap-3 text-sm leading-5 text-slate-300">
-                    <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-cyan-400/10 text-cyan-300">
-                      <svg className="size-3" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                        <path d="m3.5 8.2 2.7 2.6 6.3-6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                    {formatDeviceCount(tariff.deviceCount)}
-                  </li>
-                  {tariff.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3 text-sm leading-5 text-slate-300">
-                      <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-cyan-400/10 text-cyan-300">
-                        <svg className="size-3" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                          <path d="m3.5 8.2 2.7 2.6 6.3-6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </span>
-                      {feature}
-                    </li>
-                  ))}
+                <ul className="mt-7 flex-1 space-y-3 text-sm text-slate-300">
+                  <li className="flex items-center gap-3"><span className="check-dot">✓</span>{formatDeviceCount(tariff.deviceCount)}</li>
+                  <li className="flex items-center gap-3"><span className="check-dot">✓</span>Срок: {selectedPeriod.label}</li>
                 </ul>
 
-                <div className="mt-8 space-y-2.5">
-                  <a
-                    href={tariff.ctaHref}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={isFeatured ? "button-primary w-full py-3.5 text-sm" : "button-secondary w-full py-3.5 text-sm"}
-                  >
-                    {tariff.ctaLabel}
-                  </a>
-                  <a href={tariff.secondaryCtaHref} className="flex w-full items-center justify-center py-2 text-xs font-semibold text-slate-500 transition hover:text-cyan-200">
-                    {tariff.secondaryCtaLabel} <span className="ml-1.5">→</span>
-                  </a>
-                </div>
+                <a href="#lead-form" className={`${featured ? "button-primary" : "button-secondary"} mt-8 w-full py-3.5 text-sm`}>
+                  Выбрать <span aria-hidden="true">→</span>
+                </a>
               </article>
             );
           })}
         </div>
 
-        <p className="mx-auto mt-7 max-w-2xl text-center text-sm leading-6 text-slate-500">
-          Во всех тарифах доступны VPN-локации, инструкция по подключению и помощь поддержки.
+        <p className="mx-auto mt-7 max-w-2xl text-center text-xs leading-5 text-slate-600">
+          Цена указана за выбранный срок подписки. Количество устройств зависит от тарифа.
         </p>
       </div>
     </section>

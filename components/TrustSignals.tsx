@@ -5,9 +5,9 @@ const trustSignals = [
     icon: "tariffs",
   },
   {
-    title: "Подключение через Telegram",
-    description: "Основной сценарий оформления доступен в Telegram-боте.",
-    icon: "telegram",
+    title: "Два способа подключения",
+    description: "Через Telegram-бота или заявку на сайте.",
+    icon: "connection",
   },
   {
     title: "Поддержка пользователей",
@@ -25,8 +25,8 @@ function TrustIcon({ icon }: { icon: (typeof trustSignals)[number]["icon"] }) {
   if (icon === "tariffs") {
     return <><path d="M6 5h12M6 10h12M6 15h7" /><path d="M17 14v6M14 17h6" /></>;
   }
-  if (icon === "telegram") {
-    return <path d="m20.5 4.2-3 15.1c-.2 1-1 1.2-1.8.7l-4.6-3.4-2.2 2.1c-.2.3-.5.5-.9.5l.3-4.7 8.6-7.8c.4-.3-.1-.5-.6-.2L5.7 13.2 1.1 11.8c-1-.3-1-1 .2-1.5l17.9-6.9c.8-.3 1.6.2 1.3.8Z" fill="currentColor" stroke="none" />;
+  if (icon === "connection") {
+    return <><circle cx="6" cy="6" r="2" /><circle cx="18" cy="18" r="2" /><path d="M8 6h5a3 3 0 0 1 3 3v0a3 3 0 0 1-3 3h-2a3 3 0 0 0-3 3v0a3 3 0 0 0 3 3h2" /></>;
   }
   if (icon === "support") {
     return <><path d="M4 13v-2a8 8 0 0 1 16 0v2M4 12H3a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h2v-5H4ZM20 12h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2v-5h1Z" /><path d="M19 17c0 2-2 3-4 3" /></>;

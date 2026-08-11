@@ -31,7 +31,7 @@ function PointIcon({ icon }: { icon: (typeof servicePoints)[number]["icon"] }) {
 }
 
 function ProductPanel() {
-  const connectionFlow = ["Telegram", "Выбор тарифа", "Подключение", "Инструкция"];
+  const connectionFlow = ["Telegram или сайт", "Выбор тарифа", "Данные доступа", "Подключение"];
 
   return (
     <div className="relative mx-auto min-h-[430px] w-full max-w-[520px]" aria-hidden="true">
@@ -43,7 +43,7 @@ function ProductPanel() {
         <div className="flex items-center justify-between border-b border-white/[0.07] pb-4">
           <div>
             <span className="block text-[10px] font-bold uppercase tracking-[0.16em] text-violet-200">Путь подключения</span>
-            <span className="mt-1 block text-sm font-semibold text-white">От Telegram до инструкции</span>
+            <span className="mt-1 block text-sm font-semibold text-white">Выберите удобный способ</span>
           </div>
           <span className="inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.14em] text-cyan-200">
             <span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_12px_#22d3ee]" />Активно

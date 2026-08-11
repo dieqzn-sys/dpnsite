@@ -89,10 +89,10 @@ export function LeadForm() {
               <div className="relative">
                 <p className="eyebrow">Заявка на сайте</p>
                 <h2 className="mt-5 max-w-md text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl">
-                  Оформите доступ удобным способом
+                  Подключитесь через сайт
                 </h2>
                 <p className="mt-4 max-w-md text-base leading-7 text-slate-400">
-                  Выберите тариф и срок подписки. Мы рассчитаем стоимость и свяжемся с вами по указанному контакту.
+                  Оставьте заявку, если хотите оформить доступ без Telegram или нужна помощь с подключением.
                 </p>
 
                 <div className="mt-9 space-y-4">

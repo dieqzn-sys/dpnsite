@@ -1,5 +1,3 @@
-import { siteLinks } from "@/data/site";
-
 export function FinalCta() {
   return (
     <section className="pb-20 pt-8 sm:pb-28" aria-labelledby="final-cta-title">
@@ -24,17 +22,14 @@ export function FinalCta() {
               Оформите подписку через Telegram или оставьте заявку на сайте — как вам удобнее.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <a
-                href={siteLinks.telegramBot}
-                target="_blank"
-                rel="noreferrer"
+              <button
+                type="button"
                 className="button-primary px-6 py-3.5"
-                data-analytics-event="click_telegram"
-                data-analytics-context="final-cta"
+                data-open-connection
               >
-                Начать подключение
-              </a>
-              <a href="#lead-form" className="button-secondary button-secondary--muted px-6 py-3.5">Оставить заявку</a>
+                Выбрать способ
+              </button>
+              <a href="#lead-form" className="button-secondary px-6 py-3.5">Подключить через сайт</a>
             </div>
           </div>
         </div>

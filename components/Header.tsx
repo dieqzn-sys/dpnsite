@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
-import { navigation, siteLinks } from "@/data/site";
+import { navigation } from "@/data/site";
 
 export function Header() {
   const mobileMenuRef = useRef<HTMLDetailsElement>(null);
@@ -37,16 +37,13 @@ export function Header() {
 
         <div className="flex items-center gap-2.5">
           <div className="hidden sm:block">
-            <a
-              href={siteLinks.telegramBot}
-              target="_blank"
-              rel="noreferrer"
+            <button
+              type="button"
               className="button-primary min-h-10 px-4 py-2.5 text-sm"
-              data-analytics-event="click_telegram"
-              data-analytics-context="header"
+              data-open-connection
             >
-              Подключиться через Telegram
-            </a>
+              Подключиться
+            </button>
           </div>
 
           <details ref={mobileMenuRef} className="group relative xl:hidden">
@@ -73,17 +70,14 @@ export function Header() {
                   {item.label}
                 </a>
               ))}
-              <a
-                href={siteLinks.telegramBot}
-                target="_blank"
-                rel="noreferrer"
+              <button
+                type="button"
                 onClick={closeMobileMenu}
                 className="button-primary mt-2 w-full py-3 text-sm"
-                data-analytics-event="click_telegram"
-                data-analytics-context="mobile-menu"
+                data-open-connection
               >
-                Подключиться через Telegram
-              </a>
+                Подключиться
+              </button>
             </nav>
           </details>
         </div>

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { siteLinks } from "@/data/site";
 
 function HeroVisual() {
   return (
@@ -73,22 +72,19 @@ export function Hero() {
           </h1>
           <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-slate-400 sm:text-lg sm:leading-8">
             Получайте доступ к привычным сайтам и приложениям без лишних настроек.
-            <span className="mt-2 block">Подключение занимает несколько минут через Telegram.</span>
+            <span className="mt-2 block">Подключитесь удобным способом: через Telegram или оставьте заявку на сайте.</span>
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={siteLinks.telegramBot}
+            <button
+              type="button"
               className="button-primary px-6 py-3.5"
-              target="_blank"
-              rel="noreferrer"
-              data-analytics-event="click_telegram"
-              data-analytics-context="hero"
+              data-open-connection
             >
-              Подключиться через Telegram <span aria-hidden="true">↗</span>
-            </a>
-            <a href="#tariffs" className="button-secondary button-secondary--muted px-6 py-3.5">
-              Посмотреть тарифы <span aria-hidden="true">→</span>
+              Подключиться <span aria-hidden="true">→</span>
+            </button>
+            <a href="#lead-form" className="button-secondary px-6 py-3.5">
+              Подключить через сайт <span aria-hidden="true">→</span>
             </a>
           </div>
 
@@ -96,7 +92,7 @@ export function Hero() {
             {[
               ["iPhone · Android", "смартфоны"],
               ["Windows · macOS", "компьютеры"],
-              ["Telegram", "подключение и поддержка"],
+              ["Telegram · сайт", "два способа подключения"],
             ].map(([value, label]) => (
               <div key={label} className="last:col-span-2 sm:last:col-span-1">
                 <dt className="text-sm font-semibold text-white sm:text-base">{value}</dt>

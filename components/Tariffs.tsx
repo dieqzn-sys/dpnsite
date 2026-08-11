@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { SectionHeading } from "@/components/SectionHeading";
-import { siteLinks } from "@/data/site";
 import {
   formatDeviceCount,
   tariffPeriods,
@@ -86,19 +85,17 @@ export function Tariffs() {
                   <li className="flex items-center gap-3"><span className="check-dot">✓</span>Срок: {selectedPeriod.label}</li>
                 </ul>
 
-                <a
-                  href={siteLinks.telegramBot}
-                  target="_blank"
-                  rel="noreferrer"
+                <button
+                  type="button"
                   className={`${featured ? "button-primary" : "button-secondary"} mt-8 w-full py-3.5 text-sm`}
                   data-analytics-event="click_tariff"
-                  data-analytics-secondary-event="click_telegram"
                   data-analytics-context="tariff"
+                  data-open-connection
                   data-tariff={tariff.id}
                   data-period={periodId}
                 >
-                  {tariffButtonLabels[tariff.id]} <span aria-hidden="true">↗</span>
-                </a>
+                  {tariffButtonLabels[tariff.id]} <span aria-hidden="true">→</span>
+                </button>
               </article>
             );
           })}

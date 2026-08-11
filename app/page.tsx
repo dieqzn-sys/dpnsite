@@ -1,4 +1,5 @@
 import { Benefits } from "@/components/Benefits";
+import { ConnectionChooser } from "@/components/ConnectionChooser";
 import { FAQ } from "@/components/FAQ";
 import { FinalCta } from "@/components/FinalCta";
 import { Footer } from "@/components/Footer";
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <>
       <Header />
+      <ConnectionChooser />
       <main>
         <Hero />
         <Benefits />

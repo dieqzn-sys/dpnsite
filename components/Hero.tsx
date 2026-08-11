@@ -61,31 +61,38 @@ export function Hero() {
             <BrandLogo placement="hero" priority />
             <span>VPN для ваших устройств</span>
           </div>
-          <h1 className="mt-6 text-balance text-[clamp(3.1rem,8vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.065em] text-white">
-            Ваш VPN.
-            <span className="brand-gradient block">Для ваших устройств.</span>
+          <h1 className="mt-6 text-balance text-[clamp(3.1rem,7vw,4.9rem)] font-semibold leading-[0.98] tracking-[-0.065em] text-white">
+            Ваш доступ.
+            <span className="brand-gradient block">Ваши правила.</span>
           </h1>
           <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-slate-400 sm:text-lg sm:leading-8">
             DEPKOV VPN — подписка для iPhone, Android, Windows и macOS. Выберите тариф по количеству устройств и оформите доступ удобным способом.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href={siteLinks.telegramBot} className="button-primary px-6 py-3.5" target="_blank" rel="noreferrer">
-              Подключиться <span aria-hidden="true">↗</span>
+            <a
+              href={siteLinks.telegramBot}
+              className="button-primary px-6 py-3.5"
+              target="_blank"
+              rel="noreferrer"
+              data-analytics-event="click_telegram"
+              data-analytics-context="hero"
+            >
+              Подключиться через Telegram <span aria-hidden="true">↗</span>
             </a>
-            <a href="#lead-form" className="button-secondary px-6 py-3.5">
+            <a href="#lead-form" className="button-secondary button-secondary--muted px-6 py-3.5">
               Оставить заявку <span aria-hidden="true">→</span>
             </a>
           </div>
 
-          <dl className="mt-10 grid max-w-xl grid-cols-3 gap-3 border-t border-white/[0.08] pt-6">
+          <dl className="mt-10 grid max-w-xl grid-cols-2 gap-3 border-t border-white/[0.08] pt-6 sm:grid-cols-3" aria-label="Платформы и способы подключения">
             {[
-              ["2–15", "устройств"],
-              ["5", "сроков"],
-              ["2", "способа оформить"],
+              ["iPhone · Android", "смартфоны"],
+              ["Windows · macOS", "компьютеры"],
+              ["Telegram", "подключение и поддержка"],
             ].map(([value, label]) => (
-              <div key={label}>
-                <dt className="text-xl font-semibold text-white sm:text-2xl">{value}</dt>
+              <div key={label} className="last:col-span-2 sm:last:col-span-1">
+                <dt className="text-sm font-semibold text-white sm:text-base">{value}</dt>
                 <dd className="mt-1 text-[10px] leading-4 text-slate-500 sm:text-xs">{label}</dd>
               </div>
             ))}

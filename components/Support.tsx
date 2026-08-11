@@ -17,7 +17,7 @@ export function Support() {
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2 lg:min-w-[430px]">
-              <a href={siteLinks.telegramSupport} target="_blank" rel="noreferrer" className="group rounded-2xl border border-white/[0.09] bg-white/[0.035] p-5 transition hover:border-cyan-300/25 hover:bg-cyan-400/[0.055]">
+              <a href={siteLinks.telegramSupport} target="_blank" rel="noreferrer" className="group rounded-2xl border border-white/[0.09] bg-white/[0.035] p-5 transition hover:border-cyan-300/25 hover:bg-cyan-400/[0.055]" data-analytics-event="click_telegram" data-analytics-context="support">
                 <div className="flex items-center justify-between gap-4">
                   <span className="grid size-10 place-items-center rounded-xl bg-cyan-400/10 text-cyan-200">
                     <svg className="size-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m20.5 4.2-3 15.1c-.2 1-1 1.2-1.8.7l-4.6-3.4-2.2 2.1c-.2.3-.5.5-.9.5l.3-4.7 8.6-7.8c.4-.3-.1-.5-.6-.2L5.7 13.2 1.1 11.8c-1-.3-1-1 .2-1.5l17.9-6.9c.8-.3 1.6.2 1.3.8Z" fill="currentColor" /></svg>

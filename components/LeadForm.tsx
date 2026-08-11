@@ -145,7 +145,7 @@ export function LeadForm() {
                   </button>
                 </div>
               ) : (
-                <form ref={formRef} onSubmit={handleSubmit} aria-busy={status === "submitting"}>
+                <form ref={formRef} onSubmit={handleSubmit} aria-busy={status === "submitting"} data-analytics-event="submit_form">
                   <fieldset disabled={status === "submitting"} className="grid gap-5 border-0 p-0 sm:grid-cols-2">
                   <div>
                     <label className="field-label" htmlFor="name">

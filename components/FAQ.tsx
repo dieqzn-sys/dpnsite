@@ -19,7 +19,7 @@ export function FAQ() {
 
         <div className="space-y-3">
           {faqItems.map((item, index) => (
-            <details key={item.question} className="group rounded-2xl border border-white/[0.08] bg-[#090d14]/70 open:border-cyan-300/15 open:bg-cyan-400/[0.025]">
+            <details key={item.question} className="group rounded-2xl border border-white/[0.08] bg-[#090d14]/70 open:border-cyan-300/15 open:bg-cyan-400/[0.025]" data-analytics-event="faq_open" data-faq-index={index + 1}>
               <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-5 text-left sm:px-6">
                 <span className="flex items-center gap-4">
                   <span className="text-[10px] font-semibold tabular-nums text-slate-600">{String(index + 1).padStart(2, "0")}</span>

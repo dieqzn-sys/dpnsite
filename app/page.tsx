@@ -8,6 +8,7 @@ import { HowItWorks } from "@/components/HowItWorks";
 import { LeadForm } from "@/components/LeadForm";
 import { Support } from "@/components/Support";
 import { Tariffs } from "@/components/Tariffs";
+import { TrustSignals } from "@/components/TrustSignals";
 import { WhyDepkov } from "@/components/WhyDepkov";
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
         <Hero />
         <Benefits />
         <HowItWorks />
+        <TrustSignals />
         <Tariffs />
         <WhyDepkov />
         <LeadForm />

@@ -22,8 +22,17 @@ export function FinalCta() {
               Оформите подписку через Telegram или оставьте заявку на сайте — как вам удобнее.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <a href={siteLinks.telegramBot} target="_blank" rel="noreferrer" className="button-primary px-6 py-3.5">Открыть Telegram</a>
-              <a href="#lead-form" className="button-secondary px-6 py-3.5">Оставить заявку</a>
+              <a
+                href={siteLinks.telegramBot}
+                target="_blank"
+                rel="noreferrer"
+                className="button-primary px-6 py-3.5"
+                data-analytics-event="click_telegram"
+                data-analytics-context="final-cta"
+              >
+                Начать подключение
+              </a>
+              <a href="#lead-form" className="button-secondary button-secondary--muted px-6 py-3.5">Оставить заявку</a>
             </div>
           </div>
         </div>

@@ -42,8 +42,10 @@ export function Header() {
               target="_blank"
               rel="noreferrer"
               className="button-primary min-h-10 px-4 py-2.5 text-sm"
+              data-analytics-event="click_telegram"
+              data-analytics-context="header"
             >
-              Подключиться
+              Подключиться через Telegram
             </a>
           </div>
 
@@ -77,8 +79,10 @@ export function Header() {
                 rel="noreferrer"
                 onClick={closeMobileMenu}
                 className="button-primary mt-2 w-full py-3 text-sm"
+                data-analytics-event="click_telegram"
+                data-analytics-context="mobile-menu"
               >
-                Подключиться
+                Подключиться через Telegram
               </a>
             </nav>
           </details>

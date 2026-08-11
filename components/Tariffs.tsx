@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { SectionHeading } from "@/components/SectionHeading";
+import { siteLinks } from "@/data/site";
 import {
   formatDeviceCount,
   tariffPeriods,
@@ -47,15 +48,20 @@ export function Tariffs() {
             return (
               <article
                 key={tariff.id}
-                className={`relative flex flex-col overflow-hidden rounded-[1.75rem] border p-6 sm:p-7 ${featured ? "border-violet-300/45 bg-gradient-to-b from-violet-500/[0.12] via-[#0c0b1c] to-[#080912] shadow-[0_0_55px_rgba(109,40,217,0.15)] lg:-translate-y-2" : "border-white/[0.09] bg-[#090a13]/90"}`}
+                className={`relative flex flex-col overflow-hidden rounded-[1.75rem] border p-6 sm:p-7 ${featured ? "border-violet-300/45 bg-gradient-to-b from-violet-500/[0.12] via-[#0c0b1c] to-[#080912] pt-11 shadow-[0_0_55px_rgba(109,40,217,0.15)] sm:pt-12 lg:-translate-y-2" : "border-white/[0.09] bg-[#090a13]/90"}`}
               >
-                {featured && <span className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_18px_#22d3ee]" />}
+                {featured && (
+                  <>
+                    <span className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_18px_#22d3ee]" />
+                    <span className="absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap rounded-b-xl border-x border-b border-violet-300/20 bg-violet-500/15 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-violet-100">
+                      Оптимальный вариант
+                    </span>
+                  </>
+                )}
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-2xl font-semibold tracking-[-0.04em] text-white">{tariff.name}</p>
-                    <p className={`mt-1.5 text-sm font-medium ${featured ? "text-violet-200" : "text-slate-400"}`}>
-                      {tariff.positioning}
-                    </p>
+                    {!featured && <p className="mt-1.5 text-sm font-medium text-slate-400">{tariff.positioning}</p>}
                     <p className="mt-2 text-xs text-slate-600">{formatDeviceCount(tariff.deviceCount)}</p>
                   </div>
                   <span className="grid size-11 place-items-center rounded-2xl border border-violet-300/15 bg-violet-400/[0.07] text-violet-200">
@@ -74,8 +80,18 @@ export function Tariffs() {
                   <li className="flex items-center gap-3"><span className="check-dot">✓</span>Срок: {selectedPeriod.label}</li>
                 </ul>
 
-                <a href="#lead-form" className={`${featured ? "button-primary" : "button-secondary"} mt-8 w-full py-3.5 text-sm`}>
-                  Выбрать <span aria-hidden="true">→</span>
+                <a
+                  href={siteLinks.telegramBot}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`${featured ? "button-primary" : "button-secondary"} mt-8 w-full py-3.5 text-sm`}
+                  data-analytics-event="click_tariff"
+                  data-analytics-secondary-event="click_telegram"
+                  data-analytics-context="tariff"
+                  data-tariff={tariff.id}
+                  data-period={periodId}
+                >
+                  Выбрать в Telegram <span aria-hidden="true">↗</span>
                 </a>
               </article>
             );

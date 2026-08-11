@@ -186,6 +186,13 @@ summary::-webkit-details-marker {
   color: #fff;
 }
 
+.button-secondary--muted {
+  border-color: rgba(255, 255, 255, 0.085);
+  background: transparent;
+  color: #94a3b8;
+  box-shadow: none;
+}
+
 .button-primary:focus-visible,
 .button-secondary:focus-visible,
 .field:focus-visible,

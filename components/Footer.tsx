@@ -25,8 +25,17 @@ export function Footer() {
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-300">Контакты</p>
             <div className="mt-4 grid gap-3">
-              <a href={siteLinks.telegramBot} target="_blank" rel="noreferrer" className="text-sm text-slate-500 transition hover:text-cyan-200">Telegram-бот</a>
-              <a href={siteLinks.telegramSupport} target="_blank" rel="noreferrer" className="text-sm text-slate-500 transition hover:text-cyan-200">Поддержка</a>
+              <a
+                href={siteLinks.telegramBot}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm font-semibold text-cyan-300 transition hover:text-cyan-100"
+                data-analytics-event="click_telegram"
+                data-analytics-context="footer"
+              >
+                Подключиться через Telegram
+              </a>
+              <a href={siteLinks.telegramSupport} target="_blank" rel="noreferrer" className="text-sm text-slate-500 transition hover:text-cyan-200" data-analytics-event="click_telegram" data-analytics-context="footer-support">Поддержка</a>
               <a href={siteLinks.email} className="text-sm text-slate-500 transition hover:text-cyan-200">Email</a>
             </div>
           </div>

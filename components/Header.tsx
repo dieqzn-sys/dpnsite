@@ -1,4 +1,4 @@
-import { DpnMark } from "@/components/DpnMark";
+import { BrandLogo } from "@/components/BrandLogo";
 import { navigation, siteLinks } from "@/data/site";
 
 export function Header() {
@@ -9,7 +9,7 @@ export function Header() {
           href="#top"
           className="shrink-0 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300"
         >
-          <DpnMark />
+          <BrandLogo placement="header" priority />
         </a>
 
         <nav className="hidden items-center gap-6 xl:flex" aria-label="Основная навигация">

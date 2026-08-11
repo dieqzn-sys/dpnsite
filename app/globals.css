@@ -252,39 +252,34 @@ summary:focus-visible {
   font-size: 0.7rem;
 }
 
-.brand-switch {
+.brand-logo {
   position: relative;
-  display: inline-block;
-  width: 2.75rem;
-  height: 1.65rem;
+  display: block;
+  aspect-ratio: 4.9;
+  overflow: hidden;
   flex: 0 0 auto;
-  border: 1.5px solid transparent;
-  border-radius: 999px;
-  background: linear-gradient(#080812, #080812) padding-box, linear-gradient(110deg, #a855f7, #4f46e5 50%, #22d3ee) border-box;
-  box-shadow: 0 0 16px rgba(124, 58, 237, 0.32), 0 0 14px rgba(34, 211, 238, 0.15);
 }
 
-.brand-switch__track {
-  position: absolute;
-  left: 0.42rem;
-  top: 50%;
-  width: 1.4rem;
-  height: 0.75rem;
-  transform: translateY(-50%);
-  border: 1px solid rgba(167, 139, 250, 0.75);
-  border-radius: 999px;
+.brand-logo--header {
+  width: 13.5rem;
 }
 
-.brand-switch__orb {
-  position: absolute;
-  right: 0.18rem;
-  top: 50%;
-  width: 1.27rem;
-  height: 1.27rem;
-  transform: translateY(-50%);
-  border-radius: 999px;
-  background: radial-gradient(circle at 70% 35%, #67e8f9, #0ea5e9 35%, #4f46e5 67%, #7c3aed 100%);
-  box-shadow: 0 0 13px rgba(34, 211, 238, 0.72);
+.brand-logo--footer {
+  width: min(100%, 14rem);
+}
+
+.brand-logo--cta {
+  width: min(100%, 15rem);
+}
+
+.brand-logo__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: screen;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
 }
 
 .hero-visual {
@@ -302,14 +297,7 @@ summary:focus-visible {
   opacity: 0.9;
 }
 
-.power-mark {
-  position: relative;
-  width: 360px;
-  height: 185px;
-  filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.5)) drop-shadow(0 0 20px rgba(34, 211, 238, 0.25));
-}
-
-.hero-static-logo {
+.hero-switch-visual {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -321,7 +309,7 @@ summary:focus-visible {
   transform: translate(-48%, -51%);
 }
 
-.hero-static-logo__image {
+.hero-switch-visual__image {
   width: 100%;
   height: 100%;
   mix-blend-mode: screen;
@@ -330,7 +318,7 @@ summary:focus-visible {
   user-select: none;
 }
 
-.power-mark-glow {
+.hero-switch-glow {
   position: absolute;
   left: 51%;
   top: 50%;
@@ -341,50 +329,6 @@ summary:focus-visible {
   filter: blur(34px);
   opacity: 0.9;
   transform: translate(-50%, -50%);
-}
-
-.power-mark__track {
-  position: absolute;
-  inset: 0;
-  border: 4px solid transparent;
-  border-radius: 999px;
-  background: linear-gradient(#070711, #070711) padding-box, linear-gradient(108deg, #c084fc, #7c3aed 28%, #3b82f6 62%, #22d3ee) border-box;
-  box-shadow: inset 0 0 18px rgba(124, 58, 237, 0.18), 0 0 12px rgba(167, 139, 250, 0.85), 0 0 32px rgba(37, 99, 235, 0.35);
-}
-
-.power-mark__inner {
-  position: absolute;
-  left: 13%;
-  top: 31%;
-  width: 48%;
-  height: 39%;
-  border: 2px solid #8b5cf6;
-  border-right: 0;
-  border-radius: 999px 0 0 999px;
-  box-shadow: 0 0 10px rgba(139, 92, 246, 0.7), inset 0 0 8px rgba(124, 58, 237, 0.2);
-}
-
-.power-mark__orb {
-  position: absolute;
-  right: 5%;
-  top: 7%;
-  height: 86%;
-  aspect-ratio: 1;
-  overflow: hidden;
-  border-radius: 999px;
-  background: radial-gradient(circle at 72% 28%, #a5f3fc 0%, #22d3ee 17%, #0ea5e9 35%, #3b82f6 57%, #4f46e5 73%, #7c3aed 100%);
-  box-shadow: inset -14px -18px 30px rgba(30, 27, 75, 0.38), inset 10px 8px 20px rgba(255, 255, 255, 0.2), 0 0 24px rgba(34, 211, 238, 0.75), 0 0 52px rgba(79, 70, 229, 0.5);
-}
-
-.power-mark__cutout {
-  position: absolute;
-  left: -1px;
-  top: 37%;
-  width: 23%;
-  height: 26%;
-  border-radius: 0 999px 999px 0;
-  background: #070711;
-  box-shadow: 5px 0 10px rgba(5, 5, 13, 0.25);
 }
 
 .status-chip {
@@ -457,7 +401,7 @@ summary:focus-visible {
     min-height: 450px;
   }
 
-  .hero-static-logo {
+  .hero-switch-visual {
     width: min(90%, 488px);
   }
 }
@@ -471,13 +415,13 @@ summary:focus-visible {
     min-height: 340px;
   }
 
-  .hero-static-logo {
+  .hero-switch-visual {
     top: 47%;
     width: min(110%, 410px);
     border-radius: 2rem;
   }
 
-  .power-mark-glow {
+  .hero-switch-glow {
     top: 47%;
     width: 94%;
     height: 180px;
@@ -499,9 +443,8 @@ summary:focus-visible {
     bottom: 5%;
   }
 
-  .power-mark {
-    width: 290px;
-    height: 150px;
+  .brand-logo--header {
+    width: 11rem;
   }
 }
 

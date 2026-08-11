@@ -20,8 +20,8 @@ function HeroVisual() {
         <path d="M55 322c163-91 254 12 376-44 122-55 204-28 308-80" stroke="url(#wave-a)" strokeWidth="12" strokeOpacity=".18" filter="url(#wave-blur)" />
       </svg>
 
-      <div className="power-mark-glow" />
-      <div className="hero-static-logo">
+      <div className="hero-switch-glow" />
+      <div className="hero-switch-visual">
         <Image
           src="/depkov-vpn-switch.png"
           alt=""
@@ -29,7 +29,7 @@ function HeroVisual() {
           height={1254}
           priority
           sizes="(max-width: 640px) 110vw, (max-width: 1023px) 488px, 520px"
-          className="hero-static-logo__image"
+          className="hero-switch-visual__image"
           style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
           draggable={false}
         />

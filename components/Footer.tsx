@@ -1,4 +1,4 @@
-import { DpnMark } from "@/components/DpnMark";
+import { BrandLogo } from "@/components/BrandLogo";
 import { navigation, siteLinks } from "@/data/site";
 
 export function Footer() {
@@ -7,7 +7,7 @@ export function Footer() {
       <div className="container-shell">
         <div className="grid gap-10 border-b border-white/[0.06] pb-10 md:grid-cols-[1.25fr_0.75fr_0.75fr]">
           <div>
-            <DpnMark />
+            <BrandLogo placement="footer" />
             <p className="mt-5 max-w-sm text-sm leading-6 text-slate-500">
               VPN-подписка для iPhone, Android, Windows и macOS.
             </p>

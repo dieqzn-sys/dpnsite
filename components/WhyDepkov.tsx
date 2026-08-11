@@ -36,7 +36,7 @@ function ProductPanel() {
       <div className="absolute inset-[12%] rounded-full bg-violet-600/15 blur-[85px]" />
       <div className="absolute right-0 top-7 h-[360px] w-[78%] rotate-3 rounded-[2.1rem] border border-violet-300/20 bg-[#0b0b18]/95 p-4 shadow-[0_30px_90px_rgba(0,0,0,0.48)]">
         <div className="flex items-center justify-between border-b border-white/[0.07] pb-4">
-          <span className="text-xs font-bold tracking-[0.1em] text-white">DEPKOV <span className="brand-gradient">VPN</span></span>
+          <span className="text-xs font-bold tracking-[0.1em] text-white">Статус подписки</span>
           <span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_12px_#22d3ee]" />
         </div>
         <div className="mt-5 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4">
@@ -51,10 +51,19 @@ function ProductPanel() {
           <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.07]"><div className="h-full w-3/4 rounded-full bg-gradient-to-r from-violet-500 to-cyan-300" /></div>
         </div>
       </div>
-      <div className="power-mark absolute bottom-1 left-0 scale-75 sm:scale-90">
-        <div className="power-mark__track" />
-        <div className="power-mark__inner" />
-        <div className="power-mark__orb"><span className="power-mark__cutout" /></div>
+      <div className="absolute bottom-1 left-0 w-[70%] rounded-[1.75rem] border border-cyan-300/15 bg-[#080c13]/90 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
+        <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-slate-500">
+          <span>Подключение</span>
+          <span className="inline-flex items-center gap-1.5 text-cyan-200"><span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_10px_#22d3ee]" />Готово</span>
+        </div>
+        <svg className="mt-4 h-14 w-full" viewBox="0 0 280 56" fill="none" aria-hidden="true">
+          <path d="M0 44c25-5 36-26 62-18 25 8 33 21 59 9 23-11 32-30 59-18 25 11 40 25 66 8 14-9 22-12 34-10" stroke="url(#service-signal)" strokeWidth="2" />
+          <path d="M0 44c25-5 36-26 62-18 25 8 33 21 59 9 23-11 32-30 59-18 25 11 40 25 66 8 14-9 22-12 34-10V56H0Z" fill="url(#service-fill)" />
+          <defs>
+            <linearGradient id="service-signal"><stop stopColor="#8b5cf6" /><stop offset="1" stopColor="#22d3ee" /></linearGradient>
+            <linearGradient id="service-fill" x1="140" y1="12" x2="140" y2="56" gradientUnits="userSpaceOnUse"><stop stopColor="#6366f1" stopOpacity=".2" /><stop offset="1" stopColor="#22d3ee" stopOpacity="0" /></linearGradient>
+          </defs>
+        </svg>
       </div>
     </div>
   );

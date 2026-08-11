@@ -1,4 +1,4 @@
-import { DpnMark } from "@/components/DpnMark";
+import { BrandLogo } from "@/components/BrandLogo";
 import { siteLinks } from "@/data/site";
 
 export function FinalCta() {
@@ -14,7 +14,7 @@ export function FinalCta() {
           </svg>
 
           <div className="max-w-2xl">
-            <DpnMark />
+            <BrandLogo placement="cta" />
             <h2 id="final-cta-title" className="mt-6 text-balance text-3xl font-semibold tracking-[-0.045em] text-white sm:text-4xl">
               Выберите тариф DEPKOV VPN
             </h2>

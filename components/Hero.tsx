@@ -20,28 +20,20 @@ function HeroVisual() {
       </svg>
 
       <div className="hero-switch-glow" />
-      <div className="hero-switch-visual">
-        <Image
-          src="/depkov-vpn-switch.png"
-          alt=""
-          width={1254}
-          height={1254}
-          priority
-          sizes="(max-width: 640px) 110vw, (max-width: 1023px) 488px, 520px"
-          className="hero-switch-visual__image hero-switch-visual__image--base"
-          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
-          draggable={false}
-        />
-        <Image
-          src="/depkov-vpn-switch.png"
-          alt=""
-          width={1254}
-          height={1254}
-          sizes="(max-width: 640px) 110vw, (max-width: 1023px) 488px, 520px"
-          className="hero-switch-visual__image hero-switch-visual__image--knob"
-          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
-          draggable={false}
-        />
+      <div className="hero-switch-stage">
+        <div className="hero-switch-visual">
+          <Image
+            src="/depkov-vpn-switch.png"
+            alt=""
+            width={1254}
+            height={1254}
+            priority
+            sizes="(max-width: 640px) 110vw, (max-width: 1023px) 488px, 520px"
+            className="hero-switch-visual__image"
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+            draggable={false}
+          />
+        </div>
       </div>
 
       <div className="status-chip status-chip--top">

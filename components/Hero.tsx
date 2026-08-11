@@ -1,73 +1,47 @@
+import Image from "next/image";
 import { siteLinks } from "@/data/site";
 
-function NetworkVisual() {
+function HeroVisual() {
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[520px]" aria-hidden="true">
-      <div className="absolute inset-[8%] rounded-full border border-cyan-300/10 bg-cyan-400/[0.025] shadow-[0_0_120px_rgba(14,165,233,0.14)]" />
-      <div className="absolute inset-[16%] animate-[spin_28s_linear_infinite] rounded-full border border-dashed border-cyan-300/15" />
-      <div className="absolute inset-[28%] animate-[spin_18s_linear_infinite_reverse] rounded-full border border-dashed border-blue-400/15" />
-
-      <svg className="absolute inset-[12%] size-[76%] overflow-visible" viewBox="0 0 400 400">
+    <div className="hero-visual" aria-hidden="true">
+      <svg className="hero-waves" viewBox="0 0 760 480" fill="none">
         <defs>
-          <radialGradient id="globe-glow">
-            <stop offset="0" stopColor="#22d3ee" stopOpacity="0.1" />
-            <stop offset="1" stopColor="#0ea5e9" stopOpacity="0" />
-          </radialGradient>
-          <linearGradient id="line-glow" x1="0" x2="1">
-            <stop stopColor="#38bdf8" stopOpacity="0.1" />
-            <stop offset="0.5" stopColor="#67e8f9" stopOpacity="0.85" />
-            <stop offset="1" stopColor="#2563eb" stopOpacity="0.1" />
+          <linearGradient id="wave-a" x1="0" y1="240" x2="760" y2="240">
+            <stop stopColor="#7c3aed" stopOpacity="0" />
+            <stop offset="0.42" stopColor="#8b5cf6" stopOpacity=".75" />
+            <stop offset=".74" stopColor="#22d3ee" stopOpacity=".65" />
+            <stop offset="1" stopColor="#22d3ee" stopOpacity="0" />
           </linearGradient>
+          <filter id="wave-blur"><feGaussianBlur stdDeviation="7" /></filter>
         </defs>
-        <circle cx="200" cy="200" r="150" fill="url(#globe-glow)" stroke="#38bdf8" strokeOpacity="0.25" />
-        <ellipse cx="200" cy="200" rx="65" ry="150" fill="none" stroke="#38bdf8" strokeOpacity="0.18" />
-        <ellipse cx="200" cy="200" rx="118" ry="150" fill="none" stroke="#38bdf8" strokeOpacity="0.1" />
-        <ellipse cx="200" cy="200" rx="150" ry="58" fill="none" stroke="#38bdf8" strokeOpacity="0.15" />
-        <ellipse cx="200" cy="200" rx="150" ry="112" fill="none" stroke="#38bdf8" strokeOpacity="0.1" />
-        <path d="M71 124 168 177l102-66 59 138-126 64L91 257Z" fill="none" stroke="url(#line-glow)" strokeWidth="1.5" />
-        {[
-          [71, 124], [168, 177], [270, 111], [329, 249], [203, 313], [91, 257], [201, 201],
-        ].map(([x, y], index) => (
-          <g key={`${x}-${y}`}>
-            <circle cx={x} cy={y} r={index === 6 ? 7 : 5} fill="#020617" stroke="#67e8f9" strokeOpacity="0.9" />
-            <circle cx={x} cy={y} r={index === 6 ? 2.5 : 2} fill="#a5f3fc" />
-          </g>
-        ))}
+        <path d="M0 300c168-104 230 32 382-38 147-68 191-21 378-98" stroke="url(#wave-a)" strokeWidth="2" />
+        <path d="M0 338c164-88 253 28 397-44 132-66 215-37 363-116" stroke="url(#wave-a)" strokeOpacity=".5" />
+        <path d="M0 277c187-91 250 31 399-29 121-49 207-19 361-95" stroke="url(#wave-a)" strokeOpacity=".28" />
+        <path d="M55 322c163-91 254 12 376-44 122-55 204-28 308-80" stroke="url(#wave-a)" strokeWidth="12" strokeOpacity=".18" filter="url(#wave-blur)" />
       </svg>
 
-      <div className="absolute left-0 top-[26%] rounded-2xl border border-white/10 bg-[#080d16]/85 p-3.5 shadow-xl shadow-black/30 backdrop-blur-xl sm:p-4">
-        <div className="flex items-center gap-3">
-          <span className="relative flex size-2.5">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-            <span className="relative inline-flex size-2.5 rounded-full bg-emerald-400" />
-          </span>
-          <span>
-            <span className="block text-xs font-semibold text-white">Сеть активна</span>
-            <span className="mt-0.5 block text-[10px] text-slate-500">стабильное подключение</span>
-          </span>
-        </div>
+      <div className="power-mark-glow" />
+      <div className="hero-static-logo">
+        <Image
+          src="/depkov-vpn-switch.png"
+          alt=""
+          width={1254}
+          height={1254}
+          priority
+          sizes="(max-width: 640px) 110vw, (max-width: 1023px) 488px, 520px"
+          className="hero-static-logo__image"
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+          draggable={false}
+        />
       </div>
 
-      <div className="absolute bottom-[11%] right-0 w-[58%] rounded-2xl border border-cyan-300/15 bg-[#080d16]/90 p-4 shadow-2xl shadow-cyan-950/20 backdrop-blur-xl sm:p-5">
-        <div className="flex items-center justify-between gap-3">
-          <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500">DEPKOV VPN</p>
-            <p className="mt-1.5 text-sm font-semibold text-white sm:text-base">Private connection</p>
-          </div>
-          <div className="grid size-10 place-items-center rounded-xl bg-cyan-400/10 text-cyan-200">
-            <svg className="size-5" viewBox="0 0 24 24" fill="none">
-              <path d="M12 3 5.5 5.6v5.8c0 4.1 2.7 7.8 6.5 9.1 3.8-1.3 6.5-5 6.5-9.1V5.6L12 3Z" stroke="currentColor" strokeWidth="1.5" />
-              <path d="m9.5 12 1.6 1.6 3.6-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-        </div>
-        <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
-          <div className="h-full w-[82%] rounded-full bg-gradient-to-r from-blue-500 to-cyan-300 shadow-[0_0_14px_rgba(34,211,238,0.5)]" />
-        </div>
-        <div className="mt-2 flex justify-between text-[10px] text-slate-500">
-          <span>Encrypted</span>
-          <span className="text-cyan-300">Connected</span>
-        </div>
+      <div className="status-chip status-chip--top">
+        <span className="status-dot" />
+        <span><strong>DEPKOV VPN</strong><small>подписка выбрана</small></span>
+      </div>
+      <div className="status-chip status-chip--bottom">
+        <span className="status-icon">15</span>
+        <span><strong>до 15 устройств</strong><small>в тарифе Max</small></span>
       </div>
     </div>
   );
@@ -75,61 +49,46 @@ function NetworkVisual() {
 
 export function Hero() {
   return (
-    <section id="top" className="relative isolate overflow-hidden pb-22 pt-32 sm:pb-28 sm:pt-40 lg:min-h-[760px] lg:pt-44">
-      <div className="hero-grid absolute inset-0 -z-20 opacity-50" />
-      <div className="absolute left-[12%] top-20 -z-10 size-[420px] rounded-full bg-blue-600/10 blur-[130px]" />
-      <div className="absolute right-[5%] top-32 -z-10 size-[460px] rounded-full bg-cyan-500/10 blur-[150px]" />
+    <section id="top" className="relative isolate overflow-hidden pb-20 pt-30 sm:pb-28 sm:pt-38 lg:min-h-[790px] lg:pt-42">
+      <div className="hero-atmosphere absolute inset-0 -z-20" />
+      <div className="absolute left-[8%] top-28 -z-10 size-[420px] rounded-full bg-violet-700/12 blur-[140px]" />
+      <div className="absolute right-[4%] top-36 -z-10 size-[480px] rounded-full bg-cyan-500/10 blur-[160px]" />
 
-      <div className="container-shell grid items-center gap-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-8">
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/15 bg-cyan-400/[0.06] px-3 py-1.5 text-xs font-semibold text-cyan-200">
-            <span className="size-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_#67e8f9]" />
-            DEPKOV PRIVATE NETWORK
-          </div>
-
-          <h1 className="mt-7 max-w-3xl text-balance text-5xl font-semibold leading-[1.02] tracking-[-0.055em] text-white sm:text-6xl lg:text-[4.45rem]">
-            DPN — приватная сеть для <span className="text-gradient">стабильного доступа</span>
+      <div className="container-shell grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-4">
+        <div className="relative z-10 max-w-2xl">
+          <p className="eyebrow">VPN для ваших устройств</p>
+          <h1 className="mt-6 text-balance text-[clamp(3.1rem,8vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.065em] text-white">
+            Ваш доступ.
+            <span className="brand-gradient block">Ваши правила.</span>
           </h1>
-          <p className="mt-6 max-w-2xl text-pretty text-lg leading-8 text-slate-400 sm:text-xl">
-            Подключение для телефона, ПК и ноутбука. Можно оформить автоматически через Telegram или оставить заявку без Telegram.
+          <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-slate-400 sm:text-lg sm:leading-8">
+            DEPKOV VPN — подписка для iPhone, Android, Windows и macOS. Выберите тариф по количеству устройств и оформите доступ удобным способом.
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <a href={siteLinks.telegramBot} className="button-primary px-5 py-3.5" target="_blank" rel="noreferrer">
-              <svg className="size-4.5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="m20.5 4.2-3 15.1c-.2 1-1 1.2-1.8.7l-4.6-3.4-2.2 2.1c-.2.3-.5.5-.9.5l.3-4.7 8.6-7.8c.4-.3-.1-.5-.6-.2L5.7 13.2 1.1 11.8c-1-.3-1-1 .2-1.5l17.9-6.9c.8-.3 1.6.2 1.3.8Z" fill="currentColor" />
-              </svg>
-              Подключить через Telegram
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href={siteLinks.telegramBot} className="button-primary px-6 py-3.5" target="_blank" rel="noreferrer">
+              Подключиться <span aria-hidden="true">↗</span>
             </a>
-            <a href="#lead-form" className="button-secondary px-5 py-3.5">
-              Оставить заявку без Telegram
-              <span aria-hidden="true">→</span>
+            <a href="#lead-form" className="button-secondary px-6 py-3.5">
+              Оставить заявку <span aria-hidden="true">→</span>
             </a>
           </div>
 
-          <div className="mt-5 flex max-w-2xl items-start gap-2.5 text-sm leading-6 text-slate-500">
-            <svg className="mt-1 size-4 shrink-0 text-cyan-400" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 8v4l2.5 1.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-            </svg>
-            <p>
-              Автоматическая выдача доступна через Telegram. Если Telegram неудобен или недоступен — оставьте заявку на сайте.
-              <span className="mt-1 block">Ручная выдача без Telegram — обычно в течение 5–15 минут в рабочее время.</span>
-            </p>
-          </div>
-
-          <div className="mt-10 flex flex-wrap gap-x-7 gap-y-3 border-t border-white/[0.07] pt-6 text-xs font-medium text-slate-500">
-            {["iPhone", "Android", "Windows", "macOS"].map((device) => (
-              <span key={device} className="flex items-center gap-2">
-                <svg className="size-3.5 text-emerald-400" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="m4 10 3.5 3.5L16 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                {device}
-              </span>
+          <dl className="mt-10 grid max-w-xl grid-cols-3 gap-3 border-t border-white/[0.08] pt-6">
+            {[
+              ["2–15", "устройств"],
+              ["5", "сроков"],
+              ["2", "способа оформить"],
+            ].map(([value, label]) => (
+              <div key={label}>
+                <dt className="text-xl font-semibold text-white sm:text-2xl">{value}</dt>
+                <dd className="mt-1 text-[10px] leading-4 text-slate-500 sm:text-xs">{label}</dd>
+              </div>
             ))}
-          </div>
+          </dl>
         </div>
 
-        <NetworkVisual />
+        <HeroVisual />
       </div>
     </section>
   );

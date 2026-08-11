@@ -44,11 +44,19 @@ export function LeadForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(15_000),
       });
-      const result = (await response.json()) as {
+      const responseText = await response.text();
+      let result: {
         success: boolean;
         error?: string;
-      };
+      } = { success: false };
+
+      try {
+        result = JSON.parse(responseText) as typeof result;
+      } catch {
+        result = { success: false };
+      }
 
       if (!response.ok || !result.success) {
         throw new Error(result.error || "Не удалось отправить заявку.");
@@ -59,11 +67,13 @@ export function LeadForm() {
       setPeriodId("");
       setStatus("success");
     } catch (submitError) {
-      setError(
-        submitError instanceof Error
-          ? submitError.message
-          : "Не удалось отправить заявку.",
-      );
+      const message =
+        submitError instanceof DOMException && submitError.name === "TimeoutError"
+          ? "Сервер не ответил вовремя. Заявка не подтверждена — попробуйте ещё раз."
+          : submitError instanceof Error
+            ? submitError.message
+            : "Не удалось отправить заявку.";
+      setError(message);
       setStatus("error");
     }
   }
@@ -77,9 +87,9 @@ export function LeadForm() {
             <div className="relative overflow-hidden border-b border-white/[0.07] p-7 sm:p-10 lg:border-b-0 lg:border-r">
               <div className="hero-grid absolute inset-0 opacity-25" />
               <div className="relative">
-                <p className="eyebrow">Без Telegram</p>
+                <p className="eyebrow">Заявка на сайте</p>
                 <h2 className="mt-5 max-w-md text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl">
-                  Оставить заявку без Telegram
+                  Оформите доступ удобным способом
                 </h2>
                 <p className="mt-4 max-w-md text-base leading-7 text-slate-400">
                   Выберите тариф и срок подписки. Мы рассчитаем стоимость и свяжемся с вами по указанному контакту.
@@ -100,10 +110,10 @@ export function LeadForm() {
                   ))}
                 </div>
 
-                <div className="mt-10 rounded-2xl border border-white/[0.08] bg-black/20 p-4">
+                <div className="mt-10 rounded-2xl border border-violet-300/[0.12] bg-violet-400/[0.04] p-4">
                   <p className="flex items-start gap-2 text-xs font-semibold leading-5 text-white">
-                    <span className="mt-1.5 size-2 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.7)]" />
-                    Ручная выдача без Telegram — обычно в течение 5–15 минут в рабочее время.
+                    <span className="mt-1.5 size-2 shrink-0 rounded-full bg-violet-400 shadow-[0_0_10px_rgba(167,139,250,0.7)]" />
+                    После сохранения заявки мы свяжемся с вами по указанному контакту.
                   </p>
                 </div>
               </div>
@@ -135,7 +145,8 @@ export function LeadForm() {
                   </button>
                 </div>
               ) : (
-                <form ref={formRef} onSubmit={handleSubmit} className="grid gap-5 sm:grid-cols-2">
+                <form ref={formRef} onSubmit={handleSubmit} aria-busy={status === "submitting"}>
+                  <fieldset disabled={status === "submitting"} className="grid gap-5 border-0 p-0 sm:grid-cols-2">
                   <div>
                     <label className="field-label" htmlFor="name">
                       Имя <span aria-hidden="true">*</span>
@@ -245,6 +256,7 @@ export function LeadForm() {
                       Отправляя форму, вы соглашаетесь на обработку данных для связи по заявке.
                     </p>
                   </div>
+                  </fieldset>
                 </form>
               )}
             </div>

@@ -2,15 +2,15 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DPN — приватная сеть для стабильного доступа",
+  title: "DEPKOV VPN — тарифы для ваших устройств",
   description:
-    "DEPKOV PRIVATE NETWORK — VPN-подписка для телефона, ПК и ноутбука с подключением через Telegram или по заявке.",
-  applicationName: "DPN",
-  keywords: ["DPN", "DEPKOV VPN", "VPN", "приватная сеть"],
+    "DEPKOV VPN для iPhone, Android, Windows и macOS. Тарифы Start, Pro и Max на 2, 5 или 15 устройств.",
+  applicationName: "DEPKOV VPN",
+  keywords: ["DEPKOV VPN", "VPN", "VPN для устройств"],
 };
 
 export const viewport: Viewport = {
-  themeColor: "#05070b",
+  themeColor: "#05050d",
   colorScheme: "dark",
 };
 

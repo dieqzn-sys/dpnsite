@@ -9,32 +9,25 @@ export const siteLinks = {
 
 export const navigation = [
   { label: "Преимущества", href: "#benefits" },
+  { label: "Как это работает", href: "#how-it-works" },
   { label: "Тарифы", href: "#tariffs" },
-  { label: "Как подключиться", href: "#how-it-works" },
+  { label: "О сервисе", href: "#security" },
   { label: "FAQ", href: "#faq" },
-  { label: "Поддержка", href: "#support" },
 ] as const;
 
-export const devices = [
-  "iPhone",
-  "Android",
-  "Windows",
-  "macOS",
-  "Другое",
-] as const;
+export const devices = ["iPhone", "Android", "Windows", "macOS", "Другое"] as const;
 
-export const telegramSteps = [
-  "Откройте Telegram-бота DPN",
-  "Выберите срок и тариф",
-  "Оплатите",
-  "Получите VPN-подписку автоматически",
-  "Подключитесь по инструкции",
-] as const;
-
-export const manualSteps = [
-  "Оставьте заявку на сайте",
-  "Укажите контакт и устройство",
-  "Получите данные для оплаты",
-  "После оформления мы создадим VPN-подписку",
-  "Отправим ссылку подключения на указанный контакт",
+export const connectionSteps = [
+  {
+    title: "Выберите тариф",
+    description: "Ориентируйтесь на количество устройств и срок подписки.",
+  },
+  {
+    title: "Оформите доступ",
+    description: "Используйте Telegram-бота или оставьте заявку на сайте.",
+  },
+  {
+    title: "Подключите устройства",
+    description: "Получите данные доступа и следуйте инструкции для своей платформы.",
+  },
 ] as const;

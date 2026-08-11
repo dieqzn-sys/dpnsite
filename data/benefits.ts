@@ -1,10 +1,4 @@
-export type BenefitIcon =
-  | "globe"
-  | "zap"
-  | "devices"
-  | "support"
-  | "shield"
-  | "nodes";
+export type BenefitIcon = "spark" | "devices" | "route" | "support";
 
 export type Benefit = {
   title: string;
@@ -14,40 +8,23 @@ export type Benefit = {
 
 export const benefits: Benefit[] = [
   {
-    title: "Множество локаций",
-    description:
-      "Выбирайте подходящую обычную VPN-локацию для стабильного подключения.",
-    icon: "globe",
-  },
-  {
     title: "Быстрый старт",
-    description:
-      "Автоматическая выдача через Telegram сразу после оформления доступа.",
-    icon: "zap",
+    description: "Оформите подписку через Telegram-бота или оставьте заявку на сайте.",
+    icon: "spark",
   },
   {
-    title: "Для всех устройств",
-    description:
-      "Подключение на iPhone, Android, Windows и macOS по понятной инструкции.",
+    title: "Все ваши устройства",
+    description: "Тарифы рассчитаны на 2, 5 или 15 устройств — выбирайте нужный вариант.",
     icon: "devices",
   },
   {
-    title: "Поддержка рядом",
-    description:
-      "Поможем установить приложение, добавить подписку и проверить соединение.",
+    title: "iOS, Android, Windows, macOS",
+    description: "Подключение доступно для устройств на поддерживаемых платформах.",
+    icon: "route",
+  },
+  {
+    title: "Поддержка в Telegram",
+    description: "Поддержка подскажет, как добавить подписку и проверить параметры подключения.",
     icon: "support",
   },
-  {
-    title: "Основной или резервный",
-    description:
-      "Используйте DEPKOV VPN каждый день или держите готовым на случай необходимости.",
-    icon: "shield",
-  },
-  {
-    title: "Специальные узлы",
-    description:
-      "Для сложных случаев доступны отдельные узлы со своими лимитами и условиями.",
-    icon: "nodes",
-  },
 ];
-

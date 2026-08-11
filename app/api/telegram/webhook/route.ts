@@ -10,29 +10,21 @@ export const dynamic = "force-dynamic";
 type TelegramMessage = {
   message_id?: unknown;
   text?: unknown;
-  chat?: {
-    id?: unknown;
-  };
-};
-
-type TelegramCallbackQuery = {
-  id?: unknown;
-  data?: unknown;
-  message?: TelegramMessage;
+  chat?: { id?: unknown };
 };
 
 type TelegramUpdate = {
-  callback_query?: TelegramCallbackQuery;
+  callback_query?: {
+    id?: unknown;
+    data?: unknown;
+    message?: TelegramMessage;
+  };
 };
 
-type ApiResult = {
-  ok?: boolean;
-};
+type ApiResult = { ok?: boolean };
+type GoogleSheetsResult = { success?: boolean; error?: string };
 
-type GoogleSheetsResult = {
-  success?: boolean;
-  error?: string;
-};
+const retryableStatuses = new Set([408, 425, 429, 500, 502, 503, 504]);
 
 function safeResponseBody(value: string) {
   return (
@@ -43,11 +35,44 @@ function safeResponseBody(value: string) {
   );
 }
 
+function wait(delayMs: number) {
+  return new Promise((resolve) => setTimeout(resolve, delayMs));
+}
+
+async function fetchWithRetry(
+  url: string,
+  init: Omit<RequestInit, "signal">,
+  attempts = 2,
+) {
+  let lastError: unknown;
+
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      const response = await fetch(url, {
+        ...init,
+        cache: "no-store",
+        signal: AbortSignal.timeout(4_000),
+      });
+      if (!retryableStatuses.has(response.status) || attempt === attempts) {
+        return response;
+      }
+      await response.body?.cancel();
+    } catch (error) {
+      lastError = error;
+      if (attempt === attempts) {
+        throw error;
+      }
+    }
+
+    await wait(200 * attempt);
+  }
+
+  throw lastError instanceof Error ? lastError : new Error("Request failed");
+}
+
 function updateStatusLine(messageText: string, statusLabel: string) {
   const lines = messageText.replace(/\r\n?/g, "\n").split("\n");
-  const statusLineIndex = lines.findIndex((line) =>
-    line.startsWith("Статус:"),
-  );
+  const statusLineIndex = lines.findIndex((line) => line.startsWith("Статус:"));
   const nextStatusLine = `Статус: ${statusLabel}`;
 
   if (statusLineIndex >= 0) {
@@ -62,24 +87,23 @@ function updateStatusLine(messageText: string, statusLabel: string) {
 async function callTelegramApi(
   method: "answerCallbackQuery" | "editMessageText",
   payload: Record<string, unknown>,
+  attempts = 1,
 ) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN?.trim();
-
   if (!botToken) {
     console.warn(`Telegram ${method} skipped: bot token is not configured`);
     return false;
   }
 
   try {
-    const response = await fetch(
+    const response = await fetchWithRetry(
       `https://api.telegram.org/bot${botToken}/${method}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
-        cache: "no-store",
-        signal: AbortSignal.timeout(8_000),
       },
+      attempts,
     );
     const responseBody = await response.text();
     let result: ApiResult | null = null;
@@ -91,16 +115,17 @@ async function callTelegramApi(
     }
 
     if (!response.ok || !result?.ok) {
-      console.error(`Telegram ${method} failed:`, {
+      console.error(`Telegram ${method} failed`, {
         status: response.status,
         responseBody: safeResponseBody(responseBody),
       });
       return false;
     }
-
     return true;
-  } catch {
-    console.error(`Telegram ${method} failed: network request failed`);
+  } catch (error) {
+    console.error(`Telegram ${method} failed`, {
+      error: error instanceof Error ? error.name : "UnknownError",
+    });
     return false;
   }
 }
@@ -115,37 +140,30 @@ async function updateGoogleSheetsStatus({
   telegramMessageId: string;
 }) {
   const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL?.trim();
-
   if (!webhookUrl) {
-    console.warn("Google Sheets webhook URL is not configured");
-    return;
+    console.warn("Google Sheets webhook is not configured");
+    return false;
   }
 
   try {
-    const response = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        action: "updateStatus",
-        leadId,
-        status,
-        telegramMessageId,
-      }),
-      cache: "no-store",
-      redirect: "follow",
-      signal: AbortSignal.timeout(8_000),
-    });
+    const response = await fetchWithRetry(
+      webhookUrl,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "updateStatus",
+          leadId,
+          status,
+          telegramMessageId,
+        }),
+        redirect: "follow",
+      },
+      2,
+    );
     const responseBody = await response.text();
-    const safeBody = safeResponseBody(responseBody);
-
-    console.log(
-      `Google Sheets status update response status: ${response.status}`,
-    );
-    console.log(
-      `Google Sheets status update response body: ${safeBody}`,
-    );
-
     let result: GoogleSheetsResult | null = null;
+
     try {
       result = JSON.parse(responseBody) as GoogleSheetsResult;
     } catch {
@@ -153,15 +171,18 @@ async function updateGoogleSheetsStatus({
     }
 
     if (!response.ok || !result?.success) {
-      console.error("Google Sheets status update failed:", {
+      console.error("Google Sheets status update failed", {
         status: response.status,
-        responseBody: safeBody,
+        responseBody: safeResponseBody(responseBody),
       });
+      return false;
     }
-  } catch {
-    console.error(
-      "Google Sheets status update failed: network request failed",
-    );
+    return true;
+  } catch (error) {
+    console.error("Google Sheets status update failed", {
+      error: error instanceof Error ? error.name : "UnknownError",
+    });
+    return false;
   }
 }
 
@@ -170,13 +191,10 @@ export async function POST(request: Request) {
 
   try {
     const parsedUpdate: unknown = await request.json();
-    update =
-      parsedUpdate && typeof parsedUpdate === "object"
-        ? (parsedUpdate as TelegramUpdate)
-        : {};
+    update = parsedUpdate && typeof parsedUpdate === "object" ? (parsedUpdate as TelegramUpdate) : {};
   } catch {
     console.error("Telegram webhook received invalid JSON");
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: false }, { status: 400 });
   }
 
   const callbackQuery = update.callback_query;
@@ -184,12 +202,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   }
 
-  console.log("Telegram callback received", {
-    hasData: typeof callbackQuery.data === "string",
-  });
-
-  const callbackQueryId =
-    typeof callbackQuery.id === "string" ? callbackQuery.id : "";
+  const callbackQueryId = typeof callbackQuery.id === "string" ? callbackQuery.id : "";
   const statusUpdate = parseLeadStatusCallback(callbackQuery.data);
 
   if (!statusUpdate) {
@@ -200,15 +213,57 @@ export async function POST(request: Request) {
         show_alert: true,
       });
     }
-
     return NextResponse.json({ success: true });
   }
 
-  console.log("Lead status update requested", {
+  const message = callbackQuery.message;
+  const messageId = typeof message?.message_id === "number" ? message.message_id : undefined;
+  const chatId =
+    typeof message?.chat?.id === "number" || typeof message?.chat?.id === "string"
+      ? message.chat.id
+      : undefined;
+  const messageText = typeof message?.text === "string" ? message.text : "";
+  const telegramMessageId = messageId === undefined ? "" : String(messageId);
+
+  if (messageId === undefined || chatId === undefined || !messageText) {
+    console.error("Telegram callback message data is incomplete");
+    return NextResponse.json({ success: false }, { status: 400 });
+  }
+
+  // Google Sheets is the status source of truth. Telegram is updated only after
+  // Apps Script confirms the persisted value.
+  const sheetUpdated = await updateGoogleSheetsStatus({
     leadId: statusUpdate.leadId,
-    status: statusUpdate.status,
-    statusLabel: statusUpdate.statusLabel,
+    status: statusUpdate.statusLabel,
+    telegramMessageId,
   });
+
+  if (!sheetUpdated) {
+    if (callbackQueryId) {
+      await callTelegramApi("answerCallbackQuery", {
+        callback_query_id: callbackQueryId,
+        text: "Статус не сохранён. Попробуйте ещё раз.",
+        show_alert: true,
+      });
+    }
+    return NextResponse.json({ success: false }, { status: 502 });
+  }
+
+  const telegramUpdated = await callTelegramApi(
+    "editMessageText",
+    {
+      chat_id: chatId,
+      message_id: messageId,
+      text: updateStatusLine(messageText, statusUpdate.statusLabel),
+      reply_markup: buildLeadStatusKeyboard(statusUpdate.leadId),
+    },
+    2,
+  );
+
+  if (!telegramUpdated) {
+    // A non-2xx response asks Telegram to retry; the Sheets update is idempotent.
+    return NextResponse.json({ success: false }, { status: 502 });
+  }
 
   if (callbackQueryId) {
     await callTelegramApi("answerCallbackQuery", {
@@ -216,34 +271,6 @@ export async function POST(request: Request) {
       text: `Статус: ${statusUpdate.statusLabel}`,
     });
   }
-
-  const message = callbackQuery.message;
-  const messageId =
-    typeof message?.message_id === "number" ? message.message_id : undefined;
-  const chatId =
-    typeof message?.chat?.id === "number" ||
-    typeof message?.chat?.id === "string"
-      ? message.chat.id
-      : undefined;
-  const messageText = typeof message?.text === "string" ? message.text : "";
-  const telegramMessageId = messageId ? String(messageId) : "";
-
-  if (messageId !== undefined && chatId !== undefined && messageText) {
-    await callTelegramApi("editMessageText", {
-      chat_id: chatId,
-      message_id: messageId,
-      text: updateStatusLine(messageText, statusUpdate.statusLabel),
-      reply_markup: buildLeadStatusKeyboard(statusUpdate.leadId),
-    });
-  } else {
-    console.error("Telegram callback message data is incomplete");
-  }
-
-  await updateGoogleSheetsStatus({
-    leadId: statusUpdate.leadId,
-    status: statusUpdate.statusLabel,
-    telegramMessageId,
-  });
 
   return NextResponse.json({ success: true });
 }

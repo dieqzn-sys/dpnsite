@@ -1,4 +1,3 @@
-import { BrandLogo } from "@/components/BrandLogo";
 import { siteLinks } from "@/data/site";
 
 export function FinalCta() {
@@ -14,8 +13,11 @@ export function FinalCta() {
           </svg>
 
           <div className="max-w-2xl">
-            <BrandLogo placement="cta" />
-            <h2 id="final-cta-title" className="mt-6 text-balance text-3xl font-semibold tracking-[-0.045em] text-white sm:text-4xl">
+            <p className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.18em] text-cyan-200">
+              <span className="size-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_#22d3ee]" />
+              Готовы подключиться?
+            </p>
+            <h2 id="final-cta-title" className="mt-4 text-balance text-3xl font-semibold tracking-[-0.045em] text-white sm:text-4xl">
               Выберите тариф DEPKOV VPN
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-6 text-slate-400 sm:text-base">

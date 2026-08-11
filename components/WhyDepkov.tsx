@@ -50,31 +50,24 @@ function ProductPanel() {
       <div className="absolute right-0 top-6 w-[84%] rotate-2 rounded-[2.1rem] border border-violet-300/20 bg-[#0b0b18]/95 p-5 shadow-[0_30px_90px_rgba(0,0,0,0.48)] sm:p-6">
         <div className="flex items-center justify-between border-b border-white/[0.07] pb-4">
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-[0.16em] text-violet-200">DEPKOV VPN</span>
-            <span className="mt-1 block text-sm font-semibold text-white">Оформление доступа</span>
+            <span className="block text-[10px] font-bold uppercase tracking-[0.16em] text-violet-200">Подключение</span>
+            <span className="mt-1 block text-sm font-semibold text-white">Выберите удобный способ</span>
           </div>
           <span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_12px_#22d3ee]" />
         </div>
 
-        <div className="mt-5 grid grid-cols-2 gap-3">
-          <div className="rounded-2xl border border-violet-300/15 bg-violet-400/[0.055] p-4">
-            <p className="text-[10px] font-bold uppercase tracking-[0.13em] text-violet-200">Telegram</p>
-            <p className="mt-2 text-xs leading-5 text-slate-400">Выберите тариф в боте</p>
-          </div>
-          <div className="rounded-2xl border border-cyan-300/15 bg-cyan-400/[0.045] p-4">
-            <p className="text-[10px] font-bold uppercase tracking-[0.13em] text-cyan-200">На сайте</p>
-            <p className="mt-2 text-xs leading-5 text-slate-400">Оставьте контакт в форме</p>
-          </div>
-        </div>
-
-        <div className="mt-3 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4">
-          <div className="flex items-center justify-between gap-3">
-            <p className="text-[10px] uppercase tracking-[0.16em] text-slate-500">Инструкция</p>
-            <span className="text-[10px] text-cyan-200">после оформления</span>
-          </div>
-          <div className="mt-3 grid grid-cols-2 gap-2 text-[11px] text-slate-300">
-            <span>iPhone</span><span>Android</span><span>Windows</span><span>macOS</span>
-          </div>
+        <div className="mt-5 grid gap-2.5">
+          {[
+            ["01", "Telegram", "выбор тарифа"],
+            ["02", "Сайт", "заявка"],
+            ["03", "Устройство", "инструкция"],
+          ].map(([step, title, result]) => (
+            <div key={step} className="flex items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.025] px-4 py-3">
+              <span className="text-[9px] font-bold tracking-[0.14em] text-violet-300">{step}</span>
+              <span className="text-xs font-semibold text-slate-200">{title}</span>
+              <span className="ml-auto text-[11px] text-slate-500"><span className="mr-1.5 text-cyan-300">→</span>{result}</span>
+            </div>
+          ))}
         </div>
 
         <div className="mt-3 flex items-center justify-between rounded-2xl border border-white/[0.08] bg-gradient-to-r from-violet-600/15 to-cyan-400/[0.07] px-4 py-3">

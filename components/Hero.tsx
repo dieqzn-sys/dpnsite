@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { BrandLogo } from "@/components/BrandLogo";
 import { siteLinks } from "@/data/site";
 
 function HeroVisual() {
@@ -30,7 +29,17 @@ function HeroVisual() {
           height={1254}
           priority
           sizes="(max-width: 640px) 110vw, (max-width: 1023px) 488px, 520px"
-          className="hero-switch-visual__image"
+          className="hero-switch-visual__image hero-switch-visual__image--base"
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+          draggable={false}
+        />
+        <Image
+          src="/depkov-vpn-switch.png"
+          alt=""
+          width={1254}
+          height={1254}
+          sizes="(max-width: 640px) 110vw, (max-width: 1023px) 488px, 520px"
+          className="hero-switch-visual__image hero-switch-visual__image--knob"
           style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
           draggable={false}
         />
@@ -38,11 +47,11 @@ function HeroVisual() {
 
       <div className="status-chip status-chip--top">
         <span className="status-dot" />
-        <span><strong>DEPKOV VPN</strong><small>подписка выбрана</small></span>
+        <span><strong>ONLINE</strong><small>Подключение активно</small></span>
       </div>
       <div className="status-chip status-chip--bottom">
         <span className="status-icon">15</span>
-        <span><strong>до 15 устройств</strong><small>в тарифе Max</small></span>
+        <span><strong>устройств</strong><small>Max тариф</small></span>
       </div>
     </div>
   );
@@ -57,16 +66,14 @@ export function Hero() {
 
       <div className="container-shell grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-4">
         <div className="relative z-10 max-w-2xl">
-          <div className="hero-brand-badge">
-            <BrandLogo placement="hero" priority />
-            <span>VPN для ваших устройств</span>
-          </div>
+          <div className="hero-kicker"><span className="hero-kicker__dot" />VPN-подписка</div>
           <h1 className="mt-6 text-balance text-[clamp(3.1rem,7vw,4.9rem)] font-semibold leading-[0.98] tracking-[-0.065em] text-white">
             Ваш доступ.
             <span className="brand-gradient block">Ваши правила.</span>
           </h1>
           <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-slate-400 sm:text-lg sm:leading-8">
-            DEPKOV VPN — подписка для iPhone, Android, Windows и macOS. Выберите тариф по количеству устройств и оформите доступ удобным способом.
+            DEPKOV VPN — сервис, который помогает получить доступ к привычным сайтам и приложениям.
+            <span className="mt-2 block">Подключите свои устройства за несколько минут через Telegram или оставьте заявку на сайте.</span>
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">

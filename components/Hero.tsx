@@ -19,6 +19,7 @@ function HeroVisual() {
         <path d="M55 322c163-91 254 12 376-44 122-55 204-28 308-80" stroke="url(#wave-a)" strokeWidth="12" strokeOpacity=".18" filter="url(#wave-blur)" />
       </svg>
 
+      <div className="power-mark-glow" />
       <div className="power-mark power-mark--hero">
         <div className="power-mark__track" />
         <div className="power-mark__inner" />
@@ -50,8 +51,8 @@ export function Hero() {
         <div className="relative z-10 max-w-2xl">
           <p className="eyebrow">VPN для ваших устройств</p>
           <h1 className="mt-6 text-balance text-[clamp(3.1rem,8vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.065em] text-white">
-            Приватный доступ,
-            <span className="brand-gradient block">когда он нужен</span>
+            Ваш доступ.
+            <span className="brand-gradient block">Ваши правила.</span>
           </h1>
           <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-slate-400 sm:text-lg sm:leading-8">
             DEPKOV VPN — подписка для iPhone, Android, Windows и macOS. Выберите тариф по количеству устройств и оформите доступ удобным способом.
@@ -61,8 +62,8 @@ export function Hero() {
             <a href={siteLinks.telegramBot} className="button-primary px-6 py-3.5" target="_blank" rel="noreferrer">
               Подключиться <span aria-hidden="true">↗</span>
             </a>
-            <a href="#tariffs" className="button-secondary px-6 py-3.5">
-              Посмотреть тарифы <span aria-hidden="true">→</span>
+            <a href="#lead-form" className="button-secondary px-6 py-3.5">
+              Оставить заявку <span aria-hidden="true">→</span>
             </a>
           </div>
 

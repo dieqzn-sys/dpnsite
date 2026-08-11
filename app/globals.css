@@ -313,10 +313,23 @@ summary:focus-visible {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: min(82%, 450px);
-  height: min(42vw, 230px);
-  min-height: 185px;
+  width: min(72%, 395px);
+  height: min(37vw, 202px);
+  min-height: 163px;
   transform: translate(-48%, -51%) rotate(-2deg);
+}
+
+.power-mark-glow {
+  position: absolute;
+  left: 51%;
+  top: 50%;
+  width: min(88%, 500px);
+  height: 250px;
+  border-radius: 999px;
+  background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.2) 0%, rgba(124, 58, 237, 0.12) 38%, rgba(34, 211, 238, 0.08) 56%, transparent 74%);
+  filter: blur(34px);
+  opacity: 0.9;
+  transform: translate(-50%, -50%);
 }
 
 .power-mark__track {
@@ -434,8 +447,8 @@ summary:focus-visible {
   }
 
   .power-mark--hero {
-    width: min(76%, 420px);
-    height: 215px;
+    width: min(67%, 370px);
+    height: 190px;
   }
 }
 
@@ -450,9 +463,16 @@ summary:focus-visible {
 
   .power-mark--hero {
     top: 47%;
-    width: 90%;
-    height: 160px;
-    min-height: 150px;
+    width: 79%;
+    height: 142px;
+    min-height: 132px;
+  }
+
+  .power-mark-glow {
+    top: 47%;
+    width: 94%;
+    height: 180px;
+    filter: blur(28px);
   }
 
   .status-chip {

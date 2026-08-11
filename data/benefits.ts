@@ -8,22 +8,22 @@ export type Benefit = {
 
 export const benefits: Benefit[] = [
   {
-    title: "Понятное оформление",
+    title: "Быстрый старт",
     description: "Оформите подписку через Telegram-бота или оставьте заявку на сайте.",
     icon: "spark",
   },
   {
-    title: "До 15 устройств",
+    title: "Все ваши устройства",
     description: "Тарифы рассчитаны на 2, 5 или 15 устройств — выбирайте нужный вариант.",
     icon: "devices",
   },
   {
-    title: "Знакомые платформы",
-    description: "Подключение доступно для iPhone, Android, Windows и macOS.",
+    title: "iOS, Android, Windows, macOS",
+    description: "Подключение доступно для устройств на поддерживаемых платформах.",
     icon: "route",
   },
   {
-    title: "Помощь с настройкой",
+    title: "Поддержка в Telegram",
     description: "Поддержка подскажет, как добавить подписку и проверить параметры подключения.",
     icon: "support",
   },

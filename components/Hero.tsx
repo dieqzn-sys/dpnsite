@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { siteLinks } from "@/data/site";
 
 function HeroVisual() {
@@ -20,12 +21,18 @@ function HeroVisual() {
       </svg>
 
       <div className="power-mark-glow" />
-      <div className="power-mark power-mark--hero">
-        <div className="power-mark__track" />
-        <div className="power-mark__inner" />
-        <div className="power-mark__orb">
-          <span className="power-mark__cutout" />
-        </div>
+      <div className="hero-static-logo">
+        <Image
+          src="/depkov-vpn-switch.png"
+          alt=""
+          width={1254}
+          height={1254}
+          priority
+          sizes="(max-width: 640px) 110vw, (max-width: 1023px) 488px, 520px"
+          className="hero-static-logo__image"
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+          draggable={false}
+        />
       </div>
 
       <div className="status-chip status-chip--top">

@@ -309,14 +309,25 @@ summary:focus-visible {
   filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.5)) drop-shadow(0 0 20px rgba(34, 211, 238, 0.25));
 }
 
-.power-mark--hero {
+.hero-static-logo {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: min(72%, 395px);
-  height: min(37vw, 202px);
-  min-height: 163px;
-  transform: translate(-48%, -51%) rotate(-2deg);
+  width: min(94%, 520px);
+  aspect-ratio: 1.95;
+  overflow: hidden;
+  border-radius: 3rem;
+  filter: drop-shadow(0 0 24px rgba(124, 58, 237, 0.34)) drop-shadow(0 0 28px rgba(34, 211, 238, 0.18));
+  transform: translate(-48%, -51%);
+}
+
+.hero-static-logo__image {
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: screen;
+  object-fit: cover;
+  object-position: center center;
+  user-select: none;
 }
 
 .power-mark-glow {
@@ -446,9 +457,8 @@ summary:focus-visible {
     min-height: 450px;
   }
 
-  .power-mark--hero {
-    width: min(67%, 370px);
-    height: 190px;
+  .hero-static-logo {
+    width: min(90%, 488px);
   }
 }
 
@@ -461,11 +471,10 @@ summary:focus-visible {
     min-height: 340px;
   }
 
-  .power-mark--hero {
+  .hero-static-logo {
     top: 47%;
-    width: 79%;
-    height: 142px;
-    min-height: 132px;
+    width: min(110%, 410px);
+    border-radius: 2rem;
   }
 
   .power-mark-glow {

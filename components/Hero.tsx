@@ -66,7 +66,7 @@ export function Hero() {
 
       <div className="container-shell grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-4">
         <div className="relative z-10 max-w-2xl">
-          <div className="hero-kicker"><span className="hero-kicker__dot" />VPN-подписка</div>
+          <div className="hero-kicker"><span className="hero-kicker__dot" />VPN для привычных сервисов</div>
           <h1 className="mt-6 text-balance text-[clamp(3.1rem,7vw,4.9rem)] font-semibold leading-[0.98] tracking-[-0.065em] text-white">
             Ваш доступ.
             <span className="brand-gradient block">Ваши правила.</span>
@@ -87,8 +87,8 @@ export function Hero() {
             >
               Подключиться через Telegram <span aria-hidden="true">↗</span>
             </a>
-            <a href="#lead-form" className="button-secondary button-secondary--muted px-6 py-3.5">
-              Оставить заявку <span aria-hidden="true">→</span>
+            <a href="#tariffs" className="button-secondary button-secondary--muted px-6 py-3.5">
+              Посмотреть тарифы <span aria-hidden="true">→</span>
             </a>
           </div>
 

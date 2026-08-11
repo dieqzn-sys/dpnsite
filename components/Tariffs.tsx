@@ -10,6 +10,12 @@ import {
   type TariffPeriodId,
 } from "@/data/tariffs";
 
+const tariffButtonLabels = {
+  start: "Подключить Start",
+  pro: "Выбрать Pro",
+  max: "Подключить Max",
+} as const;
+
 export function Tariffs() {
   const [periodId, setPeriodId] = useState<TariffPeriodId>("1-month");
   const selectedPeriod = tariffPeriods.find((period) => period.id === periodId) ?? tariffPeriods[1];
@@ -61,7 +67,7 @@ export function Tariffs() {
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-2xl font-semibold tracking-[-0.04em] text-white">{tariff.name}</p>
-                    {!featured && <p className="mt-1.5 text-sm font-medium text-slate-400">{tariff.positioning}</p>}
+                    <p className="mt-1.5 text-sm font-medium text-slate-400">{tariff.positioning}</p>
                     <p className="mt-2 text-xs text-slate-600">{formatDeviceCount(tariff.deviceCount)}</p>
                   </div>
                   <span className="grid size-11 place-items-center rounded-2xl border border-violet-300/15 bg-violet-400/[0.07] text-violet-200">
@@ -91,7 +97,7 @@ export function Tariffs() {
                   data-tariff={tariff.id}
                   data-period={periodId}
                 >
-                  Выбрать в Telegram <span aria-hidden="true">↗</span>
+                  {tariffButtonLabels[tariff.id]} <span aria-hidden="true">↗</span>
                 </a>
               </article>
             );

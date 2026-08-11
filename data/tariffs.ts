@@ -21,7 +21,7 @@ export const tariffs: Tariff[] = [
   {
     id: "start",
     name: "Start",
-    positioning: "Для личных устройств",
+    positioning: "Для одного человека",
     deviceCount: 2,
     prices: {
       "14-days": 79,
@@ -34,7 +34,7 @@ export const tariffs: Tariff[] = [
   {
     id: "pro",
     name: "Pro",
-    positioning: "Оптимальный вариант",
+    positioning: "Для большинства пользователей",
     deviceCount: 5,
     prices: {
       "14-days": 119,

@@ -14,9 +14,19 @@ export const metadata: Metadata = {
     apple: "/depkov-vpn-switch.png",
   },
   openGraph: {
+    type: "website",
+    locale: "ru_RU",
+    url: "/",
+    siteName: "DEPKOV VPN",
     title: "DEPKOV VPN",
     description: "VPN-подписка для iPhone, Android, Windows и macOS.",
-    images: [{ url: "/depkov-vpn-logo.png", width: 2172, height: 724, alt: "DEPKOV VPN" }],
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "DEPKOV VPN" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DEPKOV VPN",
+    description: "VPN-подписка для iPhone, Android, Windows и macOS.",
+    images: ["/opengraph-image"],
   },
 };
 

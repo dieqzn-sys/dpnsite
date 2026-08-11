@@ -53,7 +53,10 @@ export function Tariffs() {
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-2xl font-semibold tracking-[-0.04em] text-white">{tariff.name}</p>
-                    <p className="mt-1 text-sm text-slate-500">{formatDeviceCount(tariff.deviceCount)}</p>
+                    <p className={`mt-1.5 text-sm font-medium ${featured ? "text-violet-200" : "text-slate-400"}`}>
+                      {tariff.positioning}
+                    </p>
+                    <p className="mt-2 text-xs text-slate-600">{formatDeviceCount(tariff.deviceCount)}</p>
                   </div>
                   <span className="grid size-11 place-items-center rounded-2xl border border-violet-300/15 bg-violet-400/[0.07] text-violet-200">
                     <svg className="size-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="2" stroke="currentColor" strokeWidth="1.5" /><path d="M8 20h8M12 16v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>

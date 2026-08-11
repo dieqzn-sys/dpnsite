@@ -1,24 +1,25 @@
+import Image from "next/image";
 import { SectionHeading } from "@/components/SectionHeading";
 
 const servicePoints = [
   {
-    title: "Прозрачные условия",
-    description: "На странице указаны конкретные сроки, цены и количество устройств для каждого тарифа.",
+    title: "Понятные тарифы",
+    description: "Start, Pro и Max отличаются количеством устройств. Цена зависит от выбранного срока.",
     icon: "list",
   },
   {
-    title: "Выбор способа оформления",
-    description: "Telegram-бот для автоматизированного сценария или форма с ответом по указанному контакту.",
+    title: "Telegram или сайт",
+    description: "Оформите доступ через Telegram-бота или оставьте заявку на сайте.",
     icon: "route",
   },
   {
-    title: "Инструкция для устройства",
-    description: "После оформления вы получаете данные доступа и шаги для выбранной платформы.",
+    title: "Инструкции для устройств",
+    description: "После оформления вы получите данные доступа и инструкцию для выбранной платформы.",
     icon: "guide",
   },
   {
-    title: "Контакты поддержки",
-    description: "Для вопросов по настройке доступны Telegram и электронная почта.",
+    title: "Поддержка",
+    description: "Если появится вопрос по подключению, напишите в Telegram или на электронную почту.",
     icon: "support",
   },
 ] as const;
@@ -34,36 +35,64 @@ function ProductPanel() {
   return (
     <div className="relative mx-auto min-h-[430px] w-full max-w-[520px]" aria-hidden="true">
       <div className="absolute inset-[12%] rounded-full bg-violet-600/15 blur-[85px]" />
-      <div className="absolute right-0 top-7 h-[360px] w-[78%] rotate-3 rounded-[2.1rem] border border-violet-300/20 bg-[#0b0b18]/95 p-4 shadow-[0_30px_90px_rgba(0,0,0,0.48)]">
+      <div className="service-switch-art">
+        <Image
+          src="/depkov-vpn-switch.png"
+          alt=""
+          width={1254}
+          height={1254}
+          sizes="280px"
+          className="service-switch-art__image"
+          draggable={false}
+        />
+      </div>
+
+      <div className="absolute right-0 top-6 w-[84%] rotate-2 rounded-[2.1rem] border border-violet-300/20 bg-[#0b0b18]/95 p-5 shadow-[0_30px_90px_rgba(0,0,0,0.48)] sm:p-6">
         <div className="flex items-center justify-between border-b border-white/[0.07] pb-4">
-          <span className="text-xs font-bold tracking-[0.1em] text-white">Статус подписки</span>
+          <div>
+            <span className="block text-[10px] font-bold uppercase tracking-[0.16em] text-violet-200">DEPKOV VPN</span>
+            <span className="mt-1 block text-sm font-semibold text-white">Оформление доступа</span>
+          </div>
           <span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_12px_#22d3ee]" />
         </div>
-        <div className="mt-5 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4">
-          <p className="text-[10px] uppercase tracking-[0.16em] text-slate-600">Тариф</p>
-          <div className="mt-2 flex items-center justify-between"><span className="text-sm text-white">Pro</span><span className="text-xs text-violet-200">5 устройств</span></div>
+
+        <div className="mt-5 grid grid-cols-2 gap-3">
+          <div className="rounded-2xl border border-violet-300/15 bg-violet-400/[0.055] p-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.13em] text-violet-200">Telegram</p>
+            <p className="mt-2 text-xs leading-5 text-slate-400">Выберите тариф в боте</p>
+          </div>
+          <div className="rounded-2xl border border-cyan-300/15 bg-cyan-400/[0.045] p-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.13em] text-cyan-200">На сайте</p>
+            <p className="mt-2 text-xs leading-5 text-slate-400">Оставьте контакт в форме</p>
+          </div>
         </div>
+
         <div className="mt-3 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4">
-          <p className="text-[10px] uppercase tracking-[0.16em] text-slate-600">Платформы</p>
-          <div className="mt-3 grid grid-cols-2 gap-2 text-[11px] text-slate-300"><span>iPhone</span><span>Android</span><span>Windows</span><span>macOS</span></div>
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-[10px] uppercase tracking-[0.16em] text-slate-500">Инструкция</p>
+            <span className="text-[10px] text-cyan-200">после оформления</span>
+          </div>
+          <div className="mt-3 grid grid-cols-2 gap-2 text-[11px] text-slate-300">
+            <span>iPhone</span><span>Android</span><span>Windows</span><span>macOS</span>
+          </div>
         </div>
-        <div className="mt-5 h-14 rounded-2xl border border-cyan-300/15 bg-gradient-to-r from-violet-600/20 to-cyan-400/10 p-4">
-          <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.07]"><div className="h-full w-3/4 rounded-full bg-gradient-to-r from-violet-500 to-cyan-300" /></div>
+
+        <div className="mt-3 flex items-center justify-between rounded-2xl border border-white/[0.08] bg-gradient-to-r from-violet-600/15 to-cyan-400/[0.07] px-4 py-3">
+          <span className="text-xs text-slate-300">Поддержка по подключению</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-cyan-200">Telegram</span>
         </div>
       </div>
-      <div className="absolute bottom-1 left-0 w-[70%] rounded-[1.75rem] border border-cyan-300/15 bg-[#080c13]/90 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
+
+      <div className="absolute bottom-0 left-0 w-[68%] rounded-[1.75rem] border border-cyan-300/15 bg-[#080c13]/90 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
         <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-slate-500">
-          <span>Подключение</span>
-          <span className="inline-flex items-center gap-1.5 text-cyan-200"><span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_10px_#22d3ee]" />Готово</span>
+          <span>Тарифы</span>
+          <span className="inline-flex items-center gap-1.5 text-cyan-200"><span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_10px_#22d3ee]" />2–15 устройств</span>
         </div>
-        <svg className="mt-4 h-14 w-full" viewBox="0 0 280 56" fill="none" aria-hidden="true">
-          <path d="M0 44c25-5 36-26 62-18 25 8 33 21 59 9 23-11 32-30 59-18 25 11 40 25 66 8 14-9 22-12 34-10" stroke="url(#service-signal)" strokeWidth="2" />
-          <path d="M0 44c25-5 36-26 62-18 25 8 33 21 59 9 23-11 32-30 59-18 25 11 40 25 66 8 14-9 22-12 34-10V56H0Z" fill="url(#service-fill)" />
-          <defs>
-            <linearGradient id="service-signal"><stop stopColor="#8b5cf6" /><stop offset="1" stopColor="#22d3ee" /></linearGradient>
-            <linearGradient id="service-fill" x1="140" y1="12" x2="140" y2="56" gradientUnits="userSpaceOnUse"><stop stopColor="#6366f1" stopOpacity=".2" /><stop offset="1" stopColor="#22d3ee" stopOpacity="0" /></linearGradient>
-          </defs>
-        </svg>
+        <div className="mt-4 grid grid-cols-3 gap-2 text-center text-[11px] font-semibold text-slate-300">
+          <span className="rounded-xl border border-white/[0.07] bg-white/[0.025] py-2">Start</span>
+          <span className="rounded-xl border border-violet-300/20 bg-violet-400/[0.07] py-2 text-violet-100">Pro</span>
+          <span className="rounded-xl border border-white/[0.07] bg-white/[0.025] py-2">Max</span>
+        </div>
       </div>
     </div>
   );
@@ -77,8 +106,8 @@ export function WhyDepkov() {
         <div>
           <SectionHeading
             eyebrow="О сервисе"
-            title="Понятный формат без громких обещаний"
-            description="DEPKOV VPN показывает то, что можно проверить до оформления: цены, сроки, устройства и способы связи."
+            title="Всё необходимое для подключения"
+            description="Выберите тариф, оформите доступ через Telegram или сайт и получите инструкцию для своего устройства. Если понадобится помощь — рядом поддержка."
           />
           <div className="mt-9 grid gap-5 sm:grid-cols-2">
             {servicePoints.map((point) => (

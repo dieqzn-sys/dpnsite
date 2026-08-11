@@ -12,6 +12,7 @@ export type TariffId = "start" | "pro" | "max";
 export type Tariff = {
   id: TariffId;
   name: "Start" | "Pro" | "Max";
+  positioning: string;
   deviceCount: number;
   prices: Record<TariffPeriodId, number>;
 };
@@ -20,6 +21,7 @@ export const tariffs: Tariff[] = [
   {
     id: "start",
     name: "Start",
+    positioning: "Для личных устройств",
     deviceCount: 2,
     prices: {
       "14-days": 79,
@@ -32,6 +34,7 @@ export const tariffs: Tariff[] = [
   {
     id: "pro",
     name: "Pro",
+    positioning: "Оптимальный вариант",
     deviceCount: 5,
     prices: {
       "14-days": 119,
@@ -44,6 +47,7 @@ export const tariffs: Tariff[] = [
   {
     id: "max",
     name: "Max",
+    positioning: "Для семьи и нескольких устройств",
     deviceCount: 15,
     prices: {
       "14-days": 169,

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BrandLogo } from "@/components/BrandLogo";
 import { siteLinks } from "@/data/site";
 
 function HeroVisual() {
@@ -56,10 +57,13 @@ export function Hero() {
 
       <div className="container-shell grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-4">
         <div className="relative z-10 max-w-2xl">
-          <p className="eyebrow">VPN для ваших устройств</p>
+          <div className="hero-brand-badge">
+            <BrandLogo placement="hero" priority />
+            <span>VPN для ваших устройств</span>
+          </div>
           <h1 className="mt-6 text-balance text-[clamp(3.1rem,8vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.065em] text-white">
-            Ваш доступ.
-            <span className="brand-gradient block">Ваши правила.</span>
+            Ваш VPN.
+            <span className="brand-gradient block">Для ваших устройств.</span>
           </h1>
           <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-slate-400 sm:text-lg sm:leading-8">
             DEPKOV VPN — подписка для iPhone, Android, Windows и macOS. Выберите тариф по количеству устройств и оформите доступ удобным способом.

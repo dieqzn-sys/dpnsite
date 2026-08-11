@@ -1,7 +1,18 @@
+"use client";
+
+import { useRef } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
 import { navigation, siteLinks } from "@/data/site";
 
 export function Header() {
+  const mobileMenuRef = useRef<HTMLDetailsElement>(null);
+
+  function closeMobileMenu() {
+    if (mobileMenuRef.current) {
+      mobileMenuRef.current.open = false;
+    }
+  }
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#05050d]/75 backdrop-blur-2xl">
       <div className="container-shell flex h-18 items-center justify-between gap-4 sm:h-20">
@@ -36,7 +47,7 @@ export function Header() {
             </a>
           </div>
 
-          <details className="group relative xl:hidden">
+          <details ref={mobileMenuRef} className="group relative xl:hidden">
             <summary className="grid size-10 list-none place-items-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-200 transition hover:border-violet-300/30 hover:text-white">
               <span className="sr-only">Открыть меню</span>
               <svg className="size-5 group-open:hidden" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -54,6 +65,7 @@ export function Header() {
                 <a
                   key={item.href}
                   href={item.href}
+                  onClick={closeMobileMenu}
                   className="block rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-white/[0.05] hover:text-white"
                 >
                   {item.label}
@@ -63,6 +75,7 @@ export function Header() {
                 href={siteLinks.telegramBot}
                 target="_blank"
                 rel="noreferrer"
+                onClick={closeMobileMenu}
                 className="button-primary mt-2 w-full py-3 text-sm"
               >
                 Подключиться

@@ -255,13 +255,24 @@ summary:focus-visible {
 .brand-logo {
   position: relative;
   display: block;
-  aspect-ratio: 4.9;
   overflow: hidden;
   flex: 0 0 auto;
 }
 
+.brand-logo--wordmark {
+  aspect-ratio: 5.35;
+}
+
+.brand-logo--full {
+  aspect-ratio: 4.9;
+}
+
 .brand-logo--header {
-  width: 13.5rem;
+  width: 9.75rem;
+}
+
+.brand-logo--hero {
+  width: 10.75rem;
 }
 
 .brand-logo--footer {
@@ -280,6 +291,30 @@ summary:focus-visible {
   object-fit: cover;
   object-position: center;
   user-select: none;
+}
+
+.hero-brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-height: 2.7rem;
+  border: 1px solid rgba(167, 139, 250, 0.16);
+  border-radius: 999px;
+  background: rgba(9, 8, 22, 0.58);
+  padding: 0.35rem 1rem 0.35rem 0.7rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025), 0 0 30px rgba(109, 40, 217, 0.07);
+  backdrop-filter: blur(18px);
+}
+
+.hero-brand-badge > span:last-child {
+  border-left: 1px solid rgba(255, 255, 255, 0.09);
+  padding-left: 0.9rem;
+  color: #94a3b8;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  line-height: 1.25;
+  text-transform: uppercase;
 }
 
 .hero-visual {
@@ -396,6 +431,30 @@ summary:focus-visible {
   font-weight: 800;
 }
 
+.service-switch-art {
+  position: absolute;
+  left: -4%;
+  top: 4%;
+  z-index: 0;
+  width: 17rem;
+  aspect-ratio: 1.95;
+  overflow: hidden;
+  border-radius: 2rem;
+  opacity: 0.44;
+  filter: drop-shadow(0 0 25px rgba(124, 58, 237, 0.28)) drop-shadow(0 0 24px rgba(34, 211, 238, 0.14));
+  transform: rotate(-8deg);
+}
+
+.service-switch-art__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: screen;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+}
+
 @media (max-width: 1023px) {
   .hero-visual {
     min-height: 450px;
@@ -444,7 +503,27 @@ summary:focus-visible {
   }
 
   .brand-logo--header {
-    width: 11rem;
+    width: 8.25rem;
+  }
+
+  .brand-logo--hero {
+    width: 9rem;
+  }
+
+  .hero-brand-badge {
+    gap: 0.65rem;
+    max-width: 100%;
+    padding-right: 0.8rem;
+  }
+
+  .hero-brand-badge > span:last-child {
+    padding-left: 0.65rem;
+    font-size: 0.54rem;
+  }
+
+  .service-switch-art {
+    left: -7%;
+    width: 13.5rem;
   }
 }
 

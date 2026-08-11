@@ -18,7 +18,7 @@ export function FinalCta() {
               Готовы подключиться?
             </p>
             <h2 id="final-cta-title" className="mt-4 text-balance text-3xl font-semibold tracking-[-0.045em] text-white sm:text-4xl">
-              Выберите тариф DEPKOV VPN
+              Выберите подходящий тариф
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-6 text-slate-400 sm:text-base">
               Оформите подписку через Telegram или оставьте заявку на сайте — как вам удобнее.

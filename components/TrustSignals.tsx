@@ -42,7 +42,7 @@ export function TrustSignals() {
           <div>
             <p className="eyebrow">Почему мы</p>
             <h2 id="trust-title" className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white sm:text-3xl">
-              Почему DEPKOV VPN
+              Почему выбирают нас
             </h2>
           </div>
           <p className="max-w-md text-sm leading-6 text-slate-500">

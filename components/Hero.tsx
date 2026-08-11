@@ -72,8 +72,8 @@ export function Hero() {
             <span className="brand-gradient block">Ваши правила.</span>
           </h1>
           <p className="mt-6 max-w-xl text-pretty text-base leading-7 text-slate-400 sm:text-lg sm:leading-8">
-            DEPKOV VPN — сервис, который помогает получить доступ к привычным сайтам и приложениям.
-            <span className="mt-2 block">Подключите свои устройства за несколько минут через Telegram или оставьте заявку на сайте.</span>
+            Получайте доступ к привычным сайтам и приложениям без лишних настроек.
+            <span className="mt-2 block">Подключение занимает несколько минут через Telegram.</span>
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { SectionHeading } from "@/components/SectionHeading";
 
 const servicePoints = [
@@ -32,59 +31,51 @@ function PointIcon({ icon }: { icon: (typeof servicePoints)[number]["icon"] }) {
 }
 
 function ProductPanel() {
+  const connectionFlow = ["Telegram", "Выбор тарифа", "Подключение", "Инструкция"];
+
   return (
     <div className="relative mx-auto min-h-[430px] w-full max-w-[520px]" aria-hidden="true">
-      <div className="absolute inset-[12%] rounded-full bg-violet-600/15 blur-[85px]" />
-      <div className="service-switch-art">
-        <Image
-          src="/depkov-vpn-switch.png"
-          alt=""
-          width={1254}
-          height={1254}
-          sizes="280px"
-          className="service-switch-art__image"
-          draggable={false}
-        />
-      </div>
+      <div className="absolute inset-[10%] rounded-full bg-violet-600/14 blur-[90px]" />
+      <div className="absolute inset-x-[6%] top-3 h-40 rounded-full bg-cyan-400/[0.06] blur-[65px]" />
 
-      <div className="absolute right-0 top-6 w-[84%] rotate-2 rounded-[2.1rem] border border-violet-300/20 bg-[#0b0b18]/95 p-5 shadow-[0_30px_90px_rgba(0,0,0,0.48)] sm:p-6">
+      <div className="absolute right-0 top-3 w-[92%] rotate-1 overflow-hidden rounded-[2.1rem] border border-violet-300/20 bg-[#0b0b18]/95 p-5 shadow-[0_30px_90px_rgba(0,0,0,0.48)] sm:p-6">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_90%_8%,rgba(34,211,238,0.1),transparent_30%),linear-gradient(135deg,rgba(124,58,237,0.06),transparent_50%)]" />
         <div className="flex items-center justify-between border-b border-white/[0.07] pb-4">
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-[0.16em] text-violet-200">Подключение</span>
-            <span className="mt-1 block text-sm font-semibold text-white">Выберите удобный способ</span>
+            <span className="block text-[10px] font-bold uppercase tracking-[0.16em] text-violet-200">Путь подключения</span>
+            <span className="mt-1 block text-sm font-semibold text-white">От Telegram до инструкции</span>
           </div>
-          <span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_12px_#22d3ee]" />
+          <span className="inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.14em] text-cyan-200">
+            <span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_12px_#22d3ee]" />Активно
+          </span>
         </div>
 
-        <div className="mt-5 grid gap-2.5">
-          {[
-            ["01", "Telegram", "выбор тарифа"],
-            ["02", "Сайт", "заявка"],
-            ["03", "Устройство", "инструкция"],
-          ].map(([step, title, result]) => (
-            <div key={step} className="flex items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.025] px-4 py-3">
-              <span className="text-[9px] font-bold tracking-[0.14em] text-violet-300">{step}</span>
-              <span className="text-xs font-semibold text-slate-200">{title}</span>
-              <span className="ml-auto text-[11px] text-slate-500"><span className="mr-1.5 text-cyan-300">→</span>{result}</span>
+        <div className="mt-5 grid gap-2">
+          {connectionFlow.map((step, index) => (
+            <div key={step} className="relative flex items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.025] px-4 py-2.5">
+              <span className="grid size-7 shrink-0 place-items-center rounded-lg border border-violet-300/15 bg-violet-400/[0.07] text-[9px] font-bold text-violet-200">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="text-xs font-semibold text-slate-200">{step}</span>
+              {index < connectionFlow.length - 1 ? (
+                <span className="ml-auto text-sm text-cyan-300/70">→</span>
+              ) : (
+                <span className="ml-auto size-2 rounded-full bg-cyan-300 shadow-[0_0_10px_#22d3ee]" />
+              )}
             </div>
           ))}
         </div>
-
-        <div className="mt-3 flex items-center justify-between rounded-2xl border border-white/[0.08] bg-gradient-to-r from-violet-600/15 to-cyan-400/[0.07] px-4 py-3">
-          <span className="text-xs text-slate-300">Поддержка по подключению</span>
-          <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-cyan-200">Telegram</span>
-        </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-[68%] rounded-[1.75rem] border border-cyan-300/15 bg-[#080c13]/90 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
+      <div className="absolute bottom-0 left-0 w-[72%] rounded-[1.75rem] border border-cyan-300/15 bg-[#080c13]/90 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
         <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-slate-500">
-          <span>Тарифы</span>
-          <span className="inline-flex items-center gap-1.5 text-cyan-200"><span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_10px_#22d3ee]" />2–15 устройств</span>
+          <span>Устройства</span>
+          <span className="inline-flex items-center gap-1.5 text-cyan-200"><span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_10px_#22d3ee]" />инструкция готова</span>
         </div>
-        <div className="mt-4 grid grid-cols-3 gap-2 text-center text-[11px] font-semibold text-slate-300">
-          <span className="rounded-xl border border-white/[0.07] bg-white/[0.025] py-2">Start</span>
-          <span className="rounded-xl border border-violet-300/20 bg-violet-400/[0.07] py-2 text-violet-100">Pro</span>
-          <span className="rounded-xl border border-white/[0.07] bg-white/[0.025] py-2">Max</span>
+        <div className="mt-4 grid grid-cols-4 gap-2 text-center text-[9px] font-semibold text-slate-300 sm:text-[10px]">
+          {['iPhone', 'Android', 'Windows', 'macOS'].map((device) => (
+            <span key={device} className="rounded-xl border border-white/[0.07] bg-white/[0.025] py-2">{device}</span>
+          ))}
         </div>
       </div>
     </div>

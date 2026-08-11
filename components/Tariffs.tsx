@@ -58,7 +58,7 @@ export function Tariffs() {
                 {featured && (
                   <>
                     <span className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_18px_#22d3ee]" />
-                    <span className="absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap rounded-b-xl border-x border-b border-violet-300/20 bg-violet-500/15 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-violet-100">
+                    <span className="absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap rounded-b-xl border-x border-b border-violet-300/20 bg-violet-500/15 px-4 py-2 text-[11px] font-bold uppercase leading-4 tracking-[0.12em] text-violet-100">
                       Оптимальный вариант
                     </span>
                   </>
@@ -67,7 +67,7 @@ export function Tariffs() {
                   <div>
                     <p className="text-2xl font-semibold tracking-[-0.04em] text-white">{tariff.name}</p>
                     <p className="mt-1.5 text-sm font-medium text-slate-400">{tariff.positioning}</p>
-                    <p className="mt-2 text-xs text-slate-600">{formatDeviceCount(tariff.deviceCount)}</p>
+                    <p className="mt-2 text-xs leading-5 text-slate-500">{formatDeviceCount(tariff.deviceCount)}</p>
                   </div>
                   <span className="grid size-11 place-items-center rounded-2xl border border-violet-300/15 bg-violet-400/[0.07] text-violet-200">
                     <svg className="size-5" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="2" stroke="currentColor" strokeWidth="1.5" /><path d="M8 20h8M12 16v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
@@ -75,7 +75,7 @@ export function Tariffs() {
                 </div>
 
                 <div className="my-7 h-px bg-white/[0.07]" />
-                <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-600">{selectedPeriod.label}</p>
+                <p className="text-xs font-bold uppercase leading-4 tracking-[0.14em] text-slate-500">{selectedPeriod.label}</p>
                 <p className="mt-3 text-4xl font-semibold tracking-[-0.055em] text-white" aria-live="polite">
                   {tariff.prices[periodId]} <span className="text-lg text-slate-500">₽</span>
                 </p>
@@ -101,7 +101,7 @@ export function Tariffs() {
           })}
         </div>
 
-        <p className="mx-auto mt-7 max-w-2xl text-center text-xs leading-5 text-slate-600">
+        <p className="mx-auto mt-7 max-w-2xl text-center text-xs leading-5 text-slate-500">
           Цена указана за выбранный срок подписки. Количество устройств зависит от тарифа.
         </p>
       </div>

@@ -102,7 +102,7 @@ export function LeadForm() {
                     ["03", "Подключитесь по нашей инструкции"],
                   ].map(([number, label]) => (
                     <div key={number} className="flex items-center gap-3.5">
-                      <span className="grid size-8 place-items-center rounded-full border border-cyan-300/15 bg-cyan-400/[0.06] text-[10px] font-bold text-cyan-200">
+                      <span className="grid size-8 place-items-center rounded-full border border-cyan-300/15 bg-cyan-400/[0.06] text-[11px] font-bold leading-none text-cyan-200">
                         {number}
                       </span>
                       <span className="text-sm text-slate-300">{label}</span>
@@ -252,7 +252,7 @@ export function LeadForm() {
                         </>
                       )}
                     </button>
-                    <p className="mt-3 text-center text-[11px] leading-5 text-slate-600">
+                    <p className="mt-3 text-center text-xs leading-5 text-slate-500">
                       Отправляя форму, вы соглашаетесь на обработку данных для связи по заявке.
                     </p>
                   </div>

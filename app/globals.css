@@ -91,9 +91,9 @@ summary::-webkit-details-marker {
   align-items: center;
   gap: 0.65rem;
   color: #c4b5fd;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.19em;
+  letter-spacing: 0.17em;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -441,7 +441,7 @@ summary:focus-visible {
   background: rgba(9, 8, 22, 0.58);
   padding: 0.45rem 0.8rem;
   color: #cbd5e1;
-  font-size: 0.62rem;
+  font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   line-height: 1;
@@ -551,13 +551,13 @@ summary:focus-visible {
   z-index: 3;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  min-width: 165px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 0.8rem;
+  min-width: 172px;
+  border: 1px solid rgba(167, 139, 250, 0.12);
   border-radius: 1rem;
   background: rgba(8, 8, 19, 0.76);
-  padding: 0.8rem 0.9rem;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  padding: 0.85rem 0.95rem;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36), 0 0 24px rgba(124, 58, 237, 0.045);
   backdrop-filter: blur(18px);
 }
 
@@ -578,14 +578,16 @@ summary:focus-visible {
 
 .status-chip strong {
   color: #f8fafc;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .status-chip small {
-  margin-top: 0.15rem;
-  color: #64748b;
-  font-size: 0.58rem;
+  margin-top: 0.2rem;
+  color: #94a3b8;
+  font-size: 0.7rem;
+  line-height: 1.35;
 }
 
 .status-dot {
@@ -636,7 +638,7 @@ summary:focus-visible {
   .status-chip--bottom small {
     margin-top: 0.25rem;
     color: #94a3b8;
-    font-size: 0.66rem;
+    font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.01em;
   }
@@ -701,8 +703,8 @@ summary:focus-visible {
   }
 
   .status-chip {
-    min-width: 145px;
-    padding: 0.65rem 0.75rem;
+    min-width: 154px;
+    padding: 0.72rem 0.8rem;
   }
 
   .status-chip--top {
@@ -720,7 +722,7 @@ summary:focus-visible {
   }
 
   .hero-kicker {
-    font-size: 0.56rem;
+    font-size: 0.68rem;
   }
 
 }

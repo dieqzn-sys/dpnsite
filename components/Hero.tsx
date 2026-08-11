@@ -88,7 +88,7 @@ export function Hero() {
             ].map(([value, label]) => (
               <div key={label} className="last:col-span-2 sm:last:col-span-1">
                 <dt className="text-sm font-semibold text-white sm:text-base">{value}</dt>
-                <dd className="mt-1 text-[10px] leading-4 text-slate-500 sm:text-xs">{label}</dd>
+                <dd className="mt-1 text-[11px] leading-4 text-slate-500 sm:text-xs">{label}</dd>
               </div>
             ))}
           </dl>

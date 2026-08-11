@@ -22,7 +22,7 @@ export function FAQ() {
             <details key={item.question} className="group rounded-2xl border border-white/[0.08] bg-[#090d14]/70 open:border-cyan-300/15 open:bg-cyan-400/[0.025]" data-analytics-event="faq_open" data-faq-index={index + 1}>
               <summary className="flex cursor-pointer list-none items-center justify-between gap-5 px-5 py-5 text-left sm:px-6">
                 <span className="flex items-center gap-4">
-                  <span className="text-[10px] font-semibold tabular-nums text-slate-600">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="text-[11px] font-semibold leading-none tabular-nums text-slate-500">{String(index + 1).padStart(2, "0")}</span>
                   <span className="text-sm font-semibold text-slate-200 sm:text-base">{item.question}</span>
                 </span>
                 <span className="grid size-7 shrink-0 place-items-center rounded-full border border-white/10 text-slate-400 transition group-open:rotate-45 group-open:border-cyan-300/20 group-open:text-cyan-200">

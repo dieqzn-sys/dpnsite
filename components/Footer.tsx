@@ -39,7 +39,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 pt-6 text-[11px] text-slate-700 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-2 pt-6 text-xs leading-5 text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} DEPKOV VPN</p>
           <p>Условия и стоимость указаны на странице тарифов.</p>
         </div>

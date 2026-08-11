@@ -42,10 +42,10 @@ function ProductPanel() {
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_90%_8%,rgba(34,211,238,0.1),transparent_30%),linear-gradient(135deg,rgba(124,58,237,0.06),transparent_50%)]" />
         <div className="flex items-center justify-between border-b border-white/[0.07] pb-4">
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-[0.16em] text-violet-200">Путь подключения</span>
+            <span className="block text-[11px] font-bold uppercase leading-4 tracking-[0.14em] text-violet-200">Путь подключения</span>
             <span className="mt-1 block text-sm font-semibold text-white">Выберите удобный способ</span>
           </div>
-          <span className="inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.14em] text-cyan-200">
+          <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase leading-4 tracking-[0.12em] text-cyan-200">
             <span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_12px_#22d3ee]" />Активно
           </span>
         </div>
@@ -53,7 +53,7 @@ function ProductPanel() {
         <div className="mt-5 grid gap-2">
           {connectionFlow.map((step, index) => (
             <div key={step} className="relative flex items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.025] px-4 py-2.5">
-              <span className="grid size-7 shrink-0 place-items-center rounded-lg border border-violet-300/15 bg-violet-400/[0.07] text-[9px] font-bold text-violet-200">
+              <span className="grid size-7 shrink-0 place-items-center rounded-lg border border-violet-300/15 bg-violet-400/[0.07] text-[11px] font-bold leading-none text-violet-200">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <span className="text-xs font-semibold text-slate-200">{step}</span>
@@ -68,11 +68,11 @@ function ProductPanel() {
       </div>
 
       <div className="absolute bottom-0 left-0 w-[72%] rounded-[1.75rem] border border-cyan-300/15 bg-[#080c13]/90 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
-        <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-slate-500">
+        <div className="flex items-center justify-between text-[11px] uppercase leading-4 tracking-[0.12em] text-slate-400">
           <span>Устройства</span>
           <span className="inline-flex items-center gap-1.5 text-cyan-200"><span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_10px_#22d3ee]" />инструкция готова</span>
         </div>
-        <div className="mt-4 grid grid-cols-4 gap-2 text-center text-[9px] font-semibold text-slate-300 sm:text-[10px]">
+        <div className="mt-4 grid grid-cols-4 gap-2 text-center text-[11px] font-semibold leading-4 text-slate-300">
           {['iPhone', 'Android', 'Windows', 'macOS'].map((device) => (
             <span key={device} className="rounded-xl border border-white/[0.07] bg-white/[0.025] py-2">{device}</span>
           ))}
